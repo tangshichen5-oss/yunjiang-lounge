@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { navItems } from '../data.js';
 
+const navMarks = ['厅', '礼', '酿', '厂', '定', '品'];
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -23,21 +25,22 @@ export default function Header() {
         <span className="brand-symbol">云</span>
         <span>
           <strong>云酱会客厅</strong>
-          <small>商务酱香礼酒会客厅</small>
+          <small>商务酱香礼酒</small>
         </span>
       </Link>
-      <nav className={open ? 'main-nav is-open' : 'main-nav'}>
-        {navItems.map((item) => (
+      <nav className={open ? 'main-nav is-open' : 'main-nav'} aria-label="主导航">
+        {navItems.map((item, index) => (
           <button key={`${item.label}-${item.hash || item.to}`} onClick={() => go(item)}>
+            <i>{navMarks[index]}</i>
             {item.label}
           </button>
         ))}
       </nav>
       <button className="nav-cta" onClick={() => go({ to: '/custom', hash: 'booking' })}>
-        预约咨询
+        预约品鉴
       </button>
       <button className="menu-toggle" onClick={() => setOpen((value) => !value)} aria-label="打开导航">
-        {open ? <X size={22} /> : <Menu size={22} />}
+        {open ? <X size={21} /> : <Menu size={21} />}
       </button>
     </header>
   );

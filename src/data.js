@@ -1,143 +1,156 @@
+import businessReception from './assets/images/v3/business-reception.webp';
+import clientSigning from './assets/images/v3/client-signing.webp';
+import comingSoon from './assets/images/v3/coming-soon.webp';
+import corporateGifting from './assets/images/v3/corporate-gifting.webp';
+import customBottle from './assets/images/v3/custom-bottle.webp';
+import distilleryAerial from './assets/images/v3/distillery-aerial.webp';
+import fermentationPits from './assets/images/v3/fermentation-pits.webp';
+import heroLounge from './assets/images/v3/hero-lounge.webp';
+import jarCellar from './assets/images/v3/jar-cellar.webp';
+import leesTurning from './assets/images/v3/lees-turning.webp';
+import premiumGiftBox from './assets/images/v3/premium-gift-box.webp';
+import quMaking from './assets/images/v3/qu-making.webp';
+import sorghumAerial from './assets/images/v3/sorghum-aerial.webp';
+import sorghumHarvest from './assets/images/v3/sorghum-harvest.webp';
+import tastingEvent from './assets/images/v3/tasting-event.webp';
+
+export const imageAssets = {
+  businessReception,
+  clientSigning,
+  comingSoon,
+  corporateGifting,
+  customBottle,
+  distilleryAerial,
+  fermentationPits,
+  heroLounge,
+  jarCellar,
+  leesTurning,
+  premiumGiftBox,
+  quMaking,
+  sorghumAerial,
+  sorghumHarvest,
+  tastingEvent,
+};
+
 export const navItems = [
   { label: '会客厅', to: '/', hash: 'lounge' },
-  { label: '解决方案', to: '/', hash: 'solution' },
-  { label: '产品体系', to: '/', hash: 'products' },
-  { label: '产区资源', to: '/', hash: 'resources' },
+  { label: '商务场景', to: '/', hash: 'scenes' },
+  { label: '酿造故事', to: '/', hash: 'craft' },
+  { label: '酒厂实力', to: '/', hash: 'strength' },
   { label: '企业定制', to: '/custom' },
   { label: '预约品鉴', to: '/custom', hash: 'booking' },
 ];
 
-export const productSeries = [
+export const businessScenes = [
   {
-    title: '基础标准酒',
-    subtitle: '品鉴入门 / 日常接待',
-    copy: '用于到店品鉴、日常零售和客户入门，帮助企业客户先确认酒体、预算和采购节奏。',
-    scene: '适合样品试单、商务小聚、客户初次接触。',
-    tone: 'amber',
+    title: '企业商务接待',
+    copy: '在温暖克制的会客空间里，把一瓶酒变成一次体面的商务沟通。',
+    image: businessReception,
   },
   {
+    title: '商务品鉴会',
+    copy: '用小型沙龙和预约品鉴降低新品牌信任成本，先建立口感与来源认知。',
+    image: tastingEvent,
+  },
+  {
+    title: '企业礼赠',
+    copy: '服务节庆采购、客户答谢和商协会活动，强调预算可控、包装体面。',
+    image: corporateGifting,
+  },
+  {
+    title: '客户签约场景',
+    copy: '在关键商务节点，用有产地背书的礼酒承接合作关系。',
+    image: clientSigning,
+  },
+];
+
+export const craftSteps = [
+  {
+    title: '高粱种植',
+    subtitle: '产区原料，是酱香故事的第一层底色。',
+    image: sorghumAerial,
+  },
+  {
+    title: '高粱收割',
+    subtitle: '从田间颗粒开始，保留真实农业与时间感。',
+    image: sorghumHarvest,
+  },
+  {
+    title: '制曲',
+    subtitle: '曲块、温度、湿度与等待，共同塑造酒体基础。',
+    image: quMaking,
+  },
+  {
+    title: '翻酒糟',
+    subtitle: '蒸汽与颗粒翻涌，是酿造现场最有力量的瞬间。',
+    image: leesTurning,
+  },
+  {
+    title: '发酵窖池',
+    subtitle: '48口标准酱香窖池，构成长期供应能力的核心基础。',
+    image: fermentationPits,
+  },
+  {
+    title: '陈藏',
+    subtitle: '陶坛与储酒体系，让酒体在时间里稳定、老熟、成形。',
+    image: jarCellar,
+  },
+];
+
+export const strengthStats = [
+  { value: 48, suffix: '口', label: '标准酱香窖池', note: '4m x 2.5m x 2.9m' },
+  { value: 577, suffix: '吨', label: '不锈钢储酒能力', note: '多规格储酒罐合计约577吨' },
+  { value: 3, suffix: '年以上', label: '自然陈放周期', note: '酱香白酒老熟与勾调周期' },
+  { value: 2800, suffix: '万元', label: '满负荷年综合投入', note: '试点模型估算，不构成收益承诺' },
+];
+
+export const products = [
+  {
     title: '商务礼盒酒',
-    subtitle: '节庆礼赠 / 客户维护',
-    copy: '面向年节礼赠、客户拜访和商协会活动，强调包装体面、交付稳定与预算可控。',
-    scene: '适合客户答谢、节庆团购、会员礼品。',
-    tone: 'cream',
+    label: '节庆礼赠 / 客户拜访',
+    copy: '用于企业节庆采购、客户维护和商协会活动，强调体面、稳定、可解释来源。',
+    image: premiumGiftBox,
   },
   {
     title: '企业定制酒',
-    subtitle: '品牌表达 / 场景专属',
-    copy: '围绕标签、礼盒、文案、数量和交付时间形成定制方案，把买酒转化为企业礼赠服务。',
-    scene: '适合周年纪念、内部福利、渠道专供。',
-    tone: 'walnut',
+    label: '品牌专属 / 场景定制',
+    copy: '围绕企业名称、标签、礼盒、数量与交付时间，形成专属礼酒方案。',
+    image: customBottle,
   },
   {
-    title: '渠道样品包',
-    subtitle: '礼品渠道 / 餐饮渠道',
-    copy: '为礼品公司、团购负责人和餐饮渠道预留样品展示方式，用于前期试饮和渠道沟通。',
-    scene: '适合联合开发、场景绑定、渠道试饮。',
-    tone: 'coffee',
-  },
-];
-
-export const businessScenes = [
-  {
-    title: '客户答谢',
-    copy: '在重要客户维护节点，用来源可解释、包装体面的酱香礼酒承接商务关系。',
-    visual: 'gift',
+    title: '收藏纪念酒',
+    label: '周年纪念 / 重要节点',
+    copy: '为周年庆、合作纪念、客户答谢保留更具仪式感的包装与表达空间。',
+    image: jarCellar,
   },
   {
-    title: '商协会活动',
-    copy: '通过主题品鉴、小型沙龙和会员礼品，形成集中触达和口碑传播。',
-    visual: 'lounge',
-  },
-  {
-    title: '企业节庆采购',
-    copy: '围绕春节、中秋等礼赠节点，提前梳理预算、数量、礼盒和交付计划。',
-    visual: 'meeting',
-  },
-  {
-    title: '宴席与餐饮渠道',
-    copy: '以试饮合作和场景绑定验证复购，服务宴席用酒和客户推荐。',
-    visual: 'table',
-  },
-  {
-    title: '高复购个人客户',
-    copy: '面向家庭宴请、朋友聚会和自用储酒，沉淀口感偏好与采购周期。',
-    visual: 'cellar',
-  },
-];
-
-export const resourceCards = [
-  {
-    title: '48口标准酱香窖池',
-    value: '48口',
-    copy: '窖池规格为4m x 2.5m x 2.9m，是后端酿造能力的核心基础。',
-    visual: 'pits',
-  },
-  {
-    title: '陶坛与千斤坛储存',
-    value: '95个吨坛 / 43个千斤坛',
-    copy: '为老熟、小批量试单、商务礼盒和企业定制交付提供储存基础。',
-    visual: 'jars',
-  },
-  {
-    title: '多规格不锈钢储酒罐',
-    value: '约577吨',
-    copy: '覆盖6吨、15吨、20吨、50吨、70吨、80吨、120吨等规格。',
-    visual: 'tank',
-  },
-  {
-    title: '勾调与检测能力',
-    value: '检测设备',
-    copy: '配置气相色谱仪、酒精计、滴定检测等设备，支撑酒体稳定与质量控制。',
-    visual: 'lab',
-  },
-  {
-    title: '灌装与包装交付',
-    value: '完整流程',
-    copy: '洗瓶、灌装、灯检、压盖、贴标、封口和喷码设备支持成品交付。',
-    visual: 'workshop',
-  },
-];
-
-export const customCases = [
-  {
-    title: '企业周年纪念酒',
-    copy: '预留企业名称、周年主题、纪念文案和礼盒风格的定制位。',
-  },
-  {
-    title: '商协会活动礼盒',
-    copy: '适合会议伴手礼、会员答谢和主题品鉴活动。',
-  },
-  {
-    title: '节庆客户维护方案',
-    copy: '按预算区间和采购数量提前规划礼盒、标签和交付节点。',
-  },
-  {
-    title: '渠道专供包装',
-    copy: '为礼品公司、餐饮渠道和团购负责人预留联合开发空间。',
+    title: '品鉴标准酒',
+    label: '到店品鉴 / 样品试单',
+    copy: '作为客户入门和样品试单产品，先验证口感、价格带与采购意向。',
+    image: tastingEvent,
   },
 ];
 
 export const loungeSpaces = [
   {
-    title: '会客厅主视觉',
-    copy: '木质、暖光、低声量的商务接待空间，适合预约品鉴和客户沟通。',
-    visual: 'lounge',
+    title: '会客厅主空间',
+    copy: '酒柜、木质墙面、暖色灯光和商务座席，承担第一眼的品牌信任。',
+    image: heroLounge,
   },
   {
-    title: '品鉴吧台',
-    copy: '以灯光、酒杯、样品陈列建立第一眼的专业感。',
-    visual: 'bar',
+    title: '企业洽谈',
+    copy: '围绕预算、数量、包装和交付周期，完成企业礼酒方案沟通。',
+    image: businessReception,
   },
   {
-    title: '企业洽谈区',
-    copy: '围绕预算、数量、包装与交付节奏形成可沟通的礼酒方案。',
-    visual: 'meeting',
+    title: '品鉴活动',
+    copy: '通过小型品鉴会建立口感认知、客户档案和复购线索。',
+    image: tastingEvent,
   },
   {
-    title: '礼盒展示墙',
-    copy: '预留真实产品、定制包装和渠道样品的展示位置。',
-    visual: 'display',
+    title: '礼盒展示',
+    copy: '商务礼盒与定制酒瓶是未来真实产品替换的重点展示位。',
+    image: premiumGiftBox,
   },
 ];
 
@@ -154,11 +167,7 @@ export const processSteps = [
 export const faqs = [
   {
     question: '云酱会客厅和普通烟酒店有什么不同？',
-    answer: '项目重点不是被动零售，而是通过线下品鉴、企业定制、团购转化和客户档案管理，服务本地企业礼赠与渠道合作。',
-  },
-  {
-    question: '是否会和头部名酒正面竞争？',
-    answer: '计划书中的定位是避开头部名酒的高价礼赠竞争，重点验证中端商务价格带，强调做得起、送得出、有产地背书。',
+    answer: '云酱会客厅重点不是被动零售，而是通过品鉴、定制、团购转化和客户档案管理，服务本地企业礼赠与渠道合作。',
   },
   {
     question: '企业定制可以定制哪些内容？',
@@ -166,6 +175,6 @@ export const faqs = [
   },
   {
     question: '数字化系统是不是线上卖酒平台？',
-    answer: '不是。数字化系统服务线下会客厅，主要用于扫码选品、定制需求收集、订单进度、客户档案和复购提醒。',
+    answer: '不是。它服务线下会客厅，用于扫码选品、需求收集、订单进度、客户档案和复购提醒。',
   },
 ];

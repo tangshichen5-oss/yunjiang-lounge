@@ -1,9 +1,8 @@
 import { CheckCircle2, FileText, PackageCheck, Send } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { processSteps } from '../data.js';
+import { imageAssets, processSteps } from '../data.js';
 import Revealer from '../components/Revealer.jsx';
-import VisualPlaceholder from '../components/VisualPlaceholder.jsx';
 
 const initialForm = {
   company: '',
@@ -43,20 +42,17 @@ export default function CustomPage() {
   return (
     <main className="custom-page">
       <section className="custom-hero">
+        <img src={imageAssets.customBottle} alt="企业定制酒瓶与礼盒" />
+        <div className="custom-hero-overlay" />
         <Revealer className="custom-hero-copy">
           <p className="eyebrow">Enterprise Customization</p>
           <h1>企业定制礼酒咨询</h1>
-          <p>
-            把企业名称、预算区间、采购数量、使用场景、包装需求和交付时间一次梳理清楚。当前表单为前端演示，不会真实提交后端。
-          </p>
-        </Revealer>
-        <Revealer className="custom-hero-visual" delay={120}>
-          <VisualPlaceholder type="gift" label="高端酒瓶与礼盒渲染图占位" />
+          <p>从预算、数量、场景和包装开始沟通，让每一次企业礼赠更体面、更可控。</p>
         </Revealer>
       </section>
 
       <section className="custom-content" id="booking">
-        <aside className="process-glass glass-card">
+        <aside className="process-glass">
           <div className="process-title">
             <PackageCheck size={24} />
             <h2>定制流程</h2>
@@ -69,12 +65,12 @@ export default function CustomPage() {
           ))}
         </aside>
 
-        <form className="booking-form glass-card" onSubmit={handleSubmit}>
+        <form className="booking-form" onSubmit={handleSubmit}>
           <div className="form-heading">
             <FileText size={24} />
             <div>
               <h2>预约咨询表单</h2>
-              <p>请填写初步需求，我们会以“品鉴 + 方案沟通”的方式推进。</p>
+              <p>当前表单为前端演示，不会真实提交后端。</p>
             </div>
           </div>
           <div className="form-grid">

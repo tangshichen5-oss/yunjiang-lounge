@@ -1,18 +1,20 @@
-import { ArrowRight, BadgeCheck, Building2, CalendarClock, CheckCircle2, ClipboardList, QrCode, ShieldCheck } from 'lucide-react';
+import { ArrowRight, CalendarClock, ClipboardList, QrCode, Users } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import {
   businessScenes,
-  customCases,
+  craftSteps,
   faqs,
+  imageAssets,
   loungeSpaces,
-  productSeries,
-  resourceCards,
+  products,
+  strengthStats,
 } from '../data.js';
+import CountUp from '../components/CountUp.jsx';
 import HorizontalRail from '../components/HorizontalRail.jsx';
+import ImageCard from '../components/ImageCard.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 import Revealer from '../components/Revealer.jsx';
-import VisualPlaceholder from '../components/VisualPlaceholder.jsx';
 
 export default function Home() {
   const location = useLocation();
@@ -26,52 +28,118 @@ export default function Home() {
   }, [location.state]);
 
   return (
-    <main>
-      <section id="lounge" className="hero-v2">
-        <div className="hero-stage">
-          <VisualPlaceholder type="lounge" label="高端会客厅效果图占位" />
-          <div className="hero-bottle-scene" aria-hidden="true">
-            <div className="hero-bottle" />
-            <div className="hero-box" />
-          </div>
-        </div>
-        <Revealer className="hero-copy">
+    <main className="home-v3">
+      <section id="lounge" className="v3-hero">
+        <img src={imageAssets.heroLounge} alt="云酱会客厅高端商务空间" />
+        <div className="v3-hero-shade" />
+        <Revealer className="v3-hero-copy">
           <p className="eyebrow">Yunjiang Business Lounge</p>
-          <h1>一间为企业礼酒而生的酱香会客厅</h1>
-          <p>
-            云酱会客厅不是普通烟酒店，也不是传统白酒广告页。它以真实生产资源为基础，用会客厅、品鉴、定制和数字化服务，帮助本地企业把礼酒采购变成一套体面、可控、可交付的商务方案。
-          </p>
+          <h1>
+            让每一次商务往来
+            <br />
+            都值得被记住
+          </h1>
+          <p>来自贵州酱酒产区的商务礼酒解决方案</p>
           <div className="hero-actions">
             <Link className="primary-link" to="/custom">
-              预约企业品鉴
+              预约品鉴
               <ArrowRight size={18} />
             </Link>
-            <Link className="soft-link" to="/coming-soon">
-              查看空间手册
-            </Link>
+            <Link className="soft-link" to="/coming-soon">了解会客厅</Link>
           </div>
         </Revealer>
       </section>
 
-      <section id="solution" className="story-section solution-story">
-        <Revealer className="solo-copy">
-          <p className="eyebrow">Business Gift Solution</p>
-          <h2>不是卖一瓶酒，而是交付一个商务礼赠场景</h2>
+      <section className="brand-intro story-section">
+        <Revealer className="section-title">
+          <span className="ghost-title">BRAND STORY</span>
+          <p className="eyebrow">品牌故事</p>
+          <h2>从产区资源，到城市商务会客厅</h2>
           <p>
-            项目面向本地中小企业、商协会成员、礼品渠道、餐饮渠道和高复购客户。核心价值是降低新品牌信任成本，在产地背书、稳定供应、价格可控、包装体面和定制灵活之间找到适合中端商务采购的空间。
+            云酱会客厅不是一个单纯卖酒的页面，而是把贵州酱香酒生产资源、企业礼赠需求和本地商务接待场景连接起来。前端以会客厅建立信任，后端以真实生产资源支撑交付。
           </p>
         </Revealer>
-        <div className="solution-grid">
-          {[
-            ['名单制触达', '建立企业主、商协会、渠道负责人和高复购客户资源池。'],
-            ['预约制品鉴', '用小型沙龙和到店品鉴完成信任建立。'],
-            ['方案式定制', '围绕预算、数量、包装和交付周期形成服务方案。'],
-            ['客户档案沉淀', '记录偏好、采购周期、复购意向和后续跟进计划。'],
-          ].map(([title, copy], index) => (
-            <Revealer className="glass-card solution-card" delay={index * 80} key={title}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{title}</h3>
-              <p>{copy}</p>
+        <div className="intro-grid">
+          <Revealer className="intro-photo">
+            <img src={imageAssets.distilleryAerial} alt="贵州酱酒产区酒厂航拍" loading="lazy" />
+          </Revealer>
+          <Revealer className="intro-copy" delay={120}>
+            <h3>轻前端验证，重后端支撑</h3>
+            <p>
+              项目以贵阳样板空间为起点，通过品鉴会、企业邀约、商协会资源和私域运营，逐步验证客户需求、价格带、毛利结构和复购周期。
+            </p>
+            <Link className="text-link" to="/coming-soon">阅读完整品牌故事</Link>
+          </Revealer>
+        </div>
+      </section>
+
+      <HorizontalRail
+        id="scenes"
+        eyebrow="Business Scenes"
+        title="商务场景先于产品"
+        copy="企业客户真正关心的，是一次礼赠是否体面、来源是否可解释、交付是否稳定。"
+      >
+        {businessScenes.map((scene) => (
+          <ImageCard item={scene} large key={scene.title} />
+        ))}
+      </HorizontalRail>
+
+      <section id="strength" className="strength-section">
+        <img src={imageAssets.distilleryAerial} alt="酒厂航拍背景" loading="lazy" />
+        <div className="strength-overlay" />
+        <Revealer className="strength-copy">
+          <p className="eyebrow">Production Strength</p>
+          <h2>酒厂实力，是商务信任的底座</h2>
+          <p>以下数字来自计划书中的生产资源与试点测算口径，用于说明供应链基础，不作为收益承诺。</p>
+        </Revealer>
+        <div className="strength-stats">
+          {strengthStats.map((stat, index) => (
+            <Revealer className="stat-tile" delay={index * 80} key={stat.label}>
+              <CountUp value={stat.value} suffix={stat.suffix} />
+              <span>{stat.label}</span>
+              <p>{stat.note}</p>
+            </Revealer>
+          ))}
+        </div>
+      </section>
+
+      <section id="craft" className="craft-story">
+        <Revealer className="section-title">
+          <span className="ghost-title">BREWING STORY</span>
+          <p className="eyebrow">酿造故事</p>
+          <h2>从一粒高粱，到一瓶商务礼酒</h2>
+        </Revealer>
+        <div className="craft-list">
+          {craftSteps.map((step, index) => (
+            <article className="craft-step" key={step.title}>
+              <img src={step.image} alt={step.title} loading="lazy" />
+              <Revealer className="craft-copy">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{step.title}</h3>
+                <p>{step.subtitle}</p>
+              </Revealer>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="experience" className="lounge-section story-section">
+        <Revealer className="section-title">
+          <span className="ghost-title">LOUNGE EXPERIENCE</span>
+          <p className="eyebrow">会客厅体验</p>
+          <h2>网站核心不是酒瓶，而是商务会客空间</h2>
+          <p>会客厅承担品牌展示、品鉴接待、企业定制、客户洽谈和团购转化功能，是项目的第一信任入口。</p>
+        </Revealer>
+        <div className="lounge-grid">
+          {loungeSpaces.map((space, index) => (
+            <Revealer className={index === 0 ? 'lounge-card lounge-card-wide' : 'lounge-card'} delay={index * 80} key={space.title}>
+              <Link to="/coming-soon">
+                <img src={space.image} alt={space.title} loading="lazy" />
+                <div>
+                  <h3>{space.title}</h3>
+                  <p>{space.copy}</p>
+                </div>
+              </Link>
             </Revealer>
           ))}
         </div>
@@ -80,151 +148,52 @@ export default function Home() {
       <HorizontalRail
         id="products"
         eyebrow="Product System"
-        title="三层产品体系，服务不同企业采购场景"
-        copy="横向浏览产品体系。每张卡片预留高端酒瓶与礼盒渲染位，后续可替换为真实产品图。"
+        title="产品体系，为商务场景服务"
+        copy="产品不以电商货架呈现，而作为企业礼赠、定制、品鉴和纪念场景中的解决方案。"
       >
-        {productSeries.map((product) => (
+        {products.map((product) => (
           <ProductCard product={product} key={product.title} />
         ))}
       </HorizontalRail>
 
-      <HorizontalRail
-        id="scenes"
-        eyebrow="Business Scenes"
-        title="商务场景先行，产品跟随场景表达"
-        copy="企业客户关心的不是广告口号，而是这个礼品在客户维护、活动接待和渠道合作中是否体面、可解释、能交付。"
-        warm
-      >
-        {businessScenes.map((scene) => (
-          <Link to="/coming-soon" className="scene-card glass-card" key={scene.title}>
-            <VisualPlaceholder type={scene.visual} label={scene.title} />
-            <h3>{scene.title}</h3>
-            <p>{scene.copy}</p>
-          </Link>
-        ))}
-      </HorizontalRail>
-
-      <section id="story" className="split-story story-section">
-        <Revealer className="split-copy">
-          <p className="eyebrow">Brand Story</p>
-          <h2>把生产端的长期能力，转化为城市里的信任入口</h2>
-          <p>
-            计划书的核心判断是：生产资源本身并不直接等于商业成功。云酱会客厅先在贵阳建设样板空间，以轻前端验证、重后端支撑、以销定产、滚动投入的方式，逐步积累客户数据和B端订单反馈。
-          </p>
-          <Link className="text-link" to="/coming-soon">阅读完整品牌故事</Link>
-        </Revealer>
-        <Revealer className="split-visual" delay={120}>
-          <VisualPlaceholder type="meeting" label="企业接待场景占位" />
-        </Revealer>
-      </section>
-
-      <HorizontalRail
-        id="resources"
-        eyebrow="Production Resource"
-        title="产区与酿造资源，是会客厅的信任底座"
-        copy="以下内容来自计划书中的生产许可材料、设备设施和经营估算口径，用于说明供应链基础，不作为投资收益承诺。"
-      >
-        {resourceCards.map((card) => (
-          <Link to="/coming-soon" className="resource-card glass-card" key={card.title}>
-            <VisualPlaceholder type={card.visual} label={card.title} />
-            <strong>{card.value}</strong>
-            <h3>{card.title}</h3>
-            <p>{card.copy}</p>
-          </Link>
-        ))}
-      </HorizontalRail>
-
-      <section className="story-section custom-preview">
-        <Revealer className="solo-copy">
-          <p className="eyebrow">Enterprise Customization</p>
-          <h2>企业定制，从预算和场景开始，而不是从酒瓶开始</h2>
-          <p>
-            企业客户通常同时关心包装是否体面、交付是否稳定、预算是否可控、是否能体现企业形象。会客厅把这些问题前置成清晰的定制流程。
-          </p>
-        </Revealer>
-        <div className="custom-band glass-card">
-          {['需求沟通', '预算确认', '酒款建议', '包装方案', '样品确认', '生产交付', '售后回访'].map((step, index) => (
-            <div className="flow-node" key={step}>
-              <span>{index + 1}</span>
-              <p>{step}</p>
-            </div>
-          ))}
-        </div>
-        <HorizontalRail
-          eyebrow="Customization Cases"
-          title="企业定制案例占位"
-          copy="当前为样板展示位，后续可替换为真实企业案例、礼盒照片和包装方案。"
-          warm
-        >
-          {customCases.map((item) => (
-            <Link to="/coming-soon" className="case-card glass-card" key={item.title}>
-              <VisualPlaceholder type="gift" label={item.title} />
-              <h3>{item.title}</h3>
-              <p>{item.copy}</p>
-            </Link>
-          ))}
-        </HorizontalRail>
-      </section>
-
-      <section id="digital" className="story-section dashboard-story">
+      <section id="digital" className="digital-section story-section">
         <Revealer className="section-title">
-          <p className="eyebrow">Digital Service</p>
-          <h2>轻量数字化，让线下服务变得可记录、可跟进、可复盘</h2>
+          <span className="ghost-title">DIGITAL SERVICE</span>
+          <p className="eyebrow">数字化客户服务</p>
+          <h2>让线下服务更清晰，而不是喧宾夺主</h2>
         </Revealer>
-        <div className="dashboard-v2 glass-card">
-          <div className="dashboard-main">
-            <div className="dash-header">
+        <div className="liquid-panel">
+          <div className="service-console">
+            <div className="console-head">
               <span>Yunjiang Service Console</span>
               <strong>企业客户服务看板</strong>
             </div>
-            <div className="order-track">
-              {['需求确认', '方案设计', '样品确认', '包装制作', '灌装交付', '回访复购'].map((step, index) => (
-                <div className={index < 3 ? 'track-step active' : 'track-step'} key={step}>
+            <div className="console-track">
+              {['需求确认', '方案设计', '样品确认', '包装制作', '交付回访'].map((item, index) => (
+                <div className={index < 3 ? 'console-step active' : 'console-step'} key={item}>
                   <i />
-                  <p>{step}</p>
+                  <span>{item}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="dashboard-side">
-            <div className="profile-widget">
-              <h3>客户档案</h3>
-              <p><span>常购价格带</span><strong>中端商务</strong></p>
-              <p><span>采购周期</span><strong>节庆 / 活动</strong></p>
-              <p><span>复购状态</span><strong>待回访</strong></p>
-            </div>
-            <div className="tool-grid">
-              <span><QrCode size={17} />扫码选品</span>
-              <span><ClipboardList size={17} />需求表单</span>
-              <span><CalendarClock size={17} />复购提醒</span>
-            </div>
+          <div className="service-widgets">
+            <div><Users size={20} /><span>客户档案</span><strong>偏好 / 周期 / 复购</strong></div>
+            <div><QrCode size={20} /><span>扫码选品</span><strong>到店快速了解</strong></div>
+            <div><ClipboardList size={20} /><span>需求表单</span><strong>预算数量标准化</strong></div>
+            <div><CalendarClock size={20} /><span>复购提醒</span><strong>节庆节点跟进</strong></div>
           </div>
         </div>
       </section>
 
-      <HorizontalRail
-        id="experience"
-        eyebrow="Lounge Experience"
-        title="会客厅空间展示"
-        copy="以高端酒店大堂、威士忌会所和商务会客厅为参考，先搭好真实照片未来进入的位置、比例和层次。"
-      >
-        {loungeSpaces.map((space) => (
-          <Link to="/coming-soon" className="space-card glass-card" key={space.title}>
-            <VisualPlaceholder type={space.visual} label={space.title} />
-            <h3>{space.title}</h3>
-            <p>{space.copy}</p>
-          </Link>
-        ))}
-      </HorizontalRail>
-
-      <section className="story-section faq-section">
+      <section className="faq-section story-section">
         <Revealer className="section-title">
           <p className="eyebrow">FAQ</p>
           <h2>企业客户常见问题</h2>
         </Revealer>
         <div className="faq-list">
           {faqs.map((faq, index) => (
-            <Revealer className="faq-item glass-card" delay={index * 70} key={faq.question}>
+            <Revealer className="faq-item" delay={index * 70} key={faq.question}>
               <h3>{faq.question}</h3>
               <p>{faq.answer}</p>
             </Revealer>
@@ -232,18 +201,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="cta-section" id="booking">
-        <Revealer className="cta-card">
-          <div>
-            <p className="eyebrow">Book A Tasting</p>
-            <h2>为下一次企业礼赠，先预约一次品鉴</h2>
-            <p>从预算、数量、场景和包装开始沟通，形成更适合本地企业的商务礼酒方案。</p>
-          </div>
+      <section className="final-cta">
+        <img src={imageAssets.businessReception} alt="预约商务品鉴背景" loading="lazy" />
+        <div className="final-cta-copy">
+          <p className="eyebrow">Book A Tasting</p>
+          <h2>为下一次企业礼赠，先预约一次品鉴</h2>
           <Link className="primary-link" to="/custom">
             进入预约咨询
             <ArrowRight size={18} />
           </Link>
-        </Revealer>
+        </div>
       </section>
     </main>
   );
