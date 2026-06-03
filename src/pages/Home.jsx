@@ -1,6 +1,6 @@
 import { ArrowRight, CalendarClock, ClipboardList, QrCode, Users } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   businessScenes,
   craftSteps,
@@ -18,6 +18,9 @@ import Revealer from '../components/Revealer.jsx';
 
 export default function Home() {
   const location = useLocation();
+  const craftRef = useRef(null);
+  const [craftProgress, setCraftProgress] = useState('0%');
+  const [activeCraft, setActiveCraft] = useState(0);
 
   useEffect(() => {
     const hash = location.state?.hash;
@@ -27,20 +30,59 @@ export default function Home() {
     });
   }, [location.state]);
 
+  useEffect(() => {
+    const updateCraftProgress = () => {
+      const element = craftRef.current;
+      if (!element) return;
+
+      const rect = element.getBoundingClientRect();
+      const viewport = window.innerHeight || document.documentElement.clientHeight;
+      const travel = rect.height - viewport;
+      const raw = travel <= 0 ? 1 : (viewport * 0.42 - rect.top) / travel;
+      const clamped = Math.min(1, Math.max(0, raw));
+      setCraftProgress(`${Math.round(clamped * 100)}%`);
+
+      const steps = [...element.querySelectorAll('.craft-step')];
+      const center = viewport * 0.5;
+      let nearest = 0;
+      let nearestDistance = Number.POSITIVE_INFINITY;
+      steps.forEach((step, index) => {
+        const stepRect = step.getBoundingClientRect();
+        const stepCenter = stepRect.top + stepRect.height * 0.5;
+        const distance = Math.abs(stepCenter - center);
+        if (distance < nearestDistance) {
+          nearest = index;
+          nearestDistance = distance;
+        }
+      });
+      setActiveCraft(nearest);
+    };
+
+    updateCraftProgress();
+    window.addEventListener('scroll', updateCraftProgress, { passive: true });
+    window.addEventListener('resize', updateCraftProgress);
+    return () => {
+      window.removeEventListener('scroll', updateCraftProgress);
+      window.removeEventListener('resize', updateCraftProgress);
+    };
+  }, []);
+
   return (
     <main className="home-v3">
       <section id="lounge" className="v3-hero">
         <img src={imageAssets.heroLounge} alt="云酱会客厅高端商务空间" />
         <div className="v3-hero-shade" />
+        <div className="hero-ambient hero-ambient-warm" />
+        <div className="hero-ambient hero-ambient-smoke" />
         <Revealer className="v3-hero-copy">
-          <p className="eyebrow">Yunjiang Business Lounge</p>
-          <h1>
+          <p className="eyebrow hero-layer hero-layer-1">Yunjiang Business Lounge</p>
+          <h1 className="hero-layer hero-layer-2">
             让每一次商务往来
             <br />
             都值得被记住
           </h1>
-          <p>来自贵州酱酒产区的商务礼酒解决方案</p>
-          <div className="hero-actions">
+          <p className="hero-subtitle hero-layer hero-layer-3">来自贵州酱酒产区的商务礼酒解决方案</p>
+          <div className="hero-actions hero-layer hero-layer-4">
             <Link className="primary-link" to="/custom">
               预约品鉴
               <ArrowRight size={18} />
@@ -85,21 +127,32 @@ export default function Home() {
       </HorizontalRail>
 
       <section id="strength" className="strength-section">
-        <img src={imageAssets.distilleryAerial} alt="酒厂航拍背景" loading="lazy" />
+        <img src={imageAssets.fermentationPits} alt="酒厂窖池与生产实力背景" loading="lazy" />
         <div className="strength-overlay" />
-        <Revealer className="strength-copy">
-          <p className="eyebrow">Production Strength</p>
-          <h2>酒厂实力，是商务信任的底座</h2>
-          <p>以下数字来自计划书中的生产资源与试点测算口径，用于说明供应链基础，不作为收益承诺。</p>
-        </Revealer>
-        <div className="strength-stats">
-          {strengthStats.map((stat, index) => (
-            <Revealer className="stat-tile" delay={index * 80} key={stat.label}>
-              <CountUp value={stat.value} suffix={stat.suffix} />
-              <span>{stat.label}</span>
-              <p>{stat.note}</p>
+        <div className="strength-layout">
+          <Revealer className="strength-copy">
+            <p className="eyebrow">Production Strength</p>
+            <h2>酒厂实力，是商务信任的底座</h2>
+            <p>不把数据做成后台面板，而是把窖池、储酒、陈放与投入放回真实生产场景里，让企业客户理解供应链底气。</p>
+          </Revealer>
+          <div className="strength-data">
+            <Revealer className="strength-primary">
+              <span>核心生产基础</span>
+              <CountUp value={strengthStats[0].value} suffix={strengthStats[0].suffix} />
+              <p>{strengthStats[0].label}</p>
             </Revealer>
-          ))}
+            <div className="strength-secondary">
+              {strengthStats.slice(1).map((stat, index) => (
+                <Revealer className="strength-line" delay={index * 90} key={stat.label}>
+                  <CountUp value={stat.value} suffix={stat.suffix} />
+                  <div>
+                    <span>{stat.label}</span>
+                    <p>{stat.note}</p>
+                  </div>
+                </Revealer>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -107,16 +160,21 @@ export default function Home() {
         <Revealer className="section-title">
           <span className="ghost-title">BREWING STORY</span>
           <p className="eyebrow">酿造故事</p>
-          <h2>从一粒高粱，到一瓶商务礼酒</h2>
-          <p>产区环境、七道主工序、成酒展示、产品体系与会客厅体验，构成云酱礼酒的完整叙事。</p>
+          <h2>白酒七道主工序</h2>
+          <p>从原料预处理到陈酿勾调，每一步都用大图和滚动节奏呈现，让工艺成为品牌记忆点。</p>
         </Revealer>
-        <div className="craft-list">
-          <div className="craft-progress-line" />
+        <div className="craft-list" ref={craftRef}>
+          <div className="craft-progress-line" style={{ '--craft-progress': craftProgress }} />
           {craftSteps.map((step, index) => (
-            <article className={`craft-step craft-tone-${step.tone || 'default'}`} key={`${step.kicker}-${step.title}`}>
-              <img src={step.image} alt={step.title} loading="lazy" />
-              <Revealer className="craft-copy">
-                <span>{step.kicker || String(index + 1).padStart(2, '0')}</span>
+            <article
+              className={`craft-step craft-step-process craft-tone-${step.tone || 'default'} ${activeCraft === index ? 'is-active' : ''}`}
+              key={`${step.kicker}-${step.title}`}
+            >
+              <Revealer className="craft-visual">
+                <img src={step.image} alt={step.title} loading="lazy" />
+              </Revealer>
+              <Revealer className="craft-copy" delay={120}>
+                <span className="craft-number">{step.kicker || String(index + 1).padStart(2, '0')}</span>
                 <h3>{step.title}</h3>
                 <p>{step.subtitle}</p>
               </Revealer>
