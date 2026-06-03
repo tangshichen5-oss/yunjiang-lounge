@@ -100,7 +100,7 @@ export default function CustomPage() {
           <div className="form-heading">
             <FileText size={24} />
             <div>
-              <h2>预约定制咨询</h2>
+              <h2>预约需求沟通</h2>
               <p>先留下基础需求，后续可升级为“商务礼酒方案分析 + 需求卡生成”。当前表单为前端演示，不连接后台。</p>
             </div>
           </div>
@@ -141,7 +141,7 @@ export default function CustomPage() {
               <Send size={18} />
             </button>
             <Link className="soft-link dark" to="/consult">
-              预约定制咨询
+              需求方案建议
               <ArrowRight size={18} />
             </Link>
           </div>

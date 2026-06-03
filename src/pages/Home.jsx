@@ -298,7 +298,7 @@ export default function Home() {
           <p className="eyebrow">Book A Tasting</p>
           <h2>为下一次企业礼赠，先预约一次品鉴</h2>
           <Link className="primary-link" to="/consult">
-            进入预约咨询
+            进入需求方案建议
             <ArrowRight size={18} />
           </Link>
         </div>

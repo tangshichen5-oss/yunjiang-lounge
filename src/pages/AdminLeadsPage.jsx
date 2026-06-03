@@ -50,7 +50,7 @@ export default function AdminLeadsPage() {
           <div>
             <p className="eyebrow">Leads Admin</p>
             <h1>客户线索后台</h1>
-            <p>查看预约咨询页提交的商务礼酒需求。当前为轻量后台，后续可接入登录保护。</p>
+            <p>查看需求方案建议页同步的商务礼酒需求。当前为轻量后台，后续可接入登录保护。</p>
           </div>
           <button className="soft-link dark admin-refresh" type="button" onClick={loadLeads}>
             <RefreshCw size={17} />

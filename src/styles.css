@@ -2164,6 +2164,15 @@ textarea:focus {
   row-gap: 12px;
 }
 
+.action-helper-text {
+  flex: 0 0 100%;
+  margin: -2px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: center;
+}
+
 .secondary-action-row {
   flex: 0 0 100%;
   display: flex;

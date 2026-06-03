@@ -1,6 +1,5 @@
-import { ArrowRight, ClipboardList, RotateCcw, Sparkles } from 'lucide-react';
+import { ClipboardList, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { imageAssets } from '../data.js';
 import { consultationOptions } from '../data/formOptions.js';
 import BrandSelect from '../components/BrandSelect.jsx';
@@ -219,24 +218,26 @@ export default function ConsultPage() {
     setSubmitState({ status: 'idle', message: '' });
   };
 
-  const handleSubmitLead = async () => {
+  const handleGenerateCard = async () => {
     if (!result) return;
+    setShowCard(true);
+
     if (!demand.contact.trim()) {
       setSubmitState({
         status: 'error',
-        message: '请先填写联系方式，方便工作人员进一步沟通方案。',
+        message: '需求卡已生成。若希望工作人员继续完善方案，请补充联系方式后重新生成需求卡。',
       });
       return;
     }
 
     const leadData = buildLeadData(demand, result);
-    setSubmitState({ status: 'submitting', message: '正在提交给工作人员...' });
+    setSubmitState({ status: 'submitting', message: '正在同步需求记录...' });
 
     try {
       await submitLead(leadData);
       setSubmitState({
         status: 'success',
-        message: '已收到你的商务礼酒需求，工作人员会进一步沟通方案。',
+        message: '需求卡已生成，工作人员可根据你的填写内容继续完善商务礼酒方案。',
       });
     } catch {
       setSubmitState({
@@ -249,7 +250,7 @@ export default function ConsultPage() {
   return (
     <main className="consult-page">
       <section className="page-hero page-hero-consult">
-        <img src={imageAssets.tastingEvent} alt="商务礼酒预约品鉴与方案咨询" />
+        <img src={imageAssets.tastingEvent} alt="商务礼酒需求方案与品鉴沟通" />
         <div className="page-hero-overlay" />
         <Revealer className="page-hero-copy">
           <p className="eyebrow">Business Gift Wine Analysis</p>
@@ -262,7 +263,7 @@ export default function ConsultPage() {
         <Revealer className="section-title">
           <p className="eyebrow">Fill In Your Needs</p>
           <h2>填写真实需求，生成初步方案建议。</h2>
-          <p>这是前端规则版分析，不连接 AI。生成建议阶段不上传信息，只有点击“提交给工作人员”后才会发送线索。</p>
+          <p>根据使用场景、采购数量、预算区间和赠送对象，先整理出一张初步商务礼酒需求卡，帮助后续沟通更清楚。</p>
         </Revealer>
 
         <form className="analysis-form" onSubmit={handleAnalyze}>
@@ -282,6 +283,7 @@ export default function ConsultPage() {
                 name="contact"
                 value={demand.contact}
                 onChange={handleChange}
+                required
                 placeholder="请输入手机号或微信号"
               />
             </label>
@@ -394,24 +396,20 @@ export default function ConsultPage() {
               </ul>
             </div>
             <div className="analysis-actions result-actions">
-              <button className="primary-link form-submit" type="button" onClick={() => setShowCard(true)}>
-                生成我的需求卡
-                <ClipboardList size={18} />
-              </button>
               <button
                 className="primary-link form-submit"
                 type="button"
-                onClick={handleSubmitLead}
+                onClick={handleGenerateCard}
                 disabled={submitState.status === 'submitting'}
               >
-                提交给工作人员
-                <ArrowRight size={18} />
+                生成我的需求卡
+                <ClipboardList size={18} />
               </button>
+              <p className="action-helper-text">生成后，工作人员可根据你的填写内容继续完善商务礼酒方案。</p>
               <div className="secondary-action-row">
               <button className="soft-link dark ghost-button" type="button" onClick={reset}>
                 重新填写
               </button>
-              <Link className="soft-link dark" to="/custom">预约定制咨询</Link>
               </div>
             </div>
             <p className="privacy-hint">信息仅用于商务礼酒方案沟通，不会公开展示。</p>

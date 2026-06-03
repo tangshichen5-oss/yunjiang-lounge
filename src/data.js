@@ -46,7 +46,7 @@ export const navItems = [
   { label: '酿造故事', to: '/', hash: 'craft' },
   { label: '酒厂实力', to: '/', hash: 'strength' },
   { label: '企业定制', to: '/custom' },
-  { label: '预约咨询', to: '/consult' },
+  { label: '需求方案建议', to: '/consult' },
 ];
 
 export const businessScenes = [
@@ -95,7 +95,7 @@ export const businessScenes = [
   {
     title: '商务品鉴会',
     label: '沙龙 / 选品 / 信任建立',
-    copy: '用小型沙龙和预约品鉴降低新品牌信任成本，先建立口感、来源和服务认知。',
+    copy: '用小型沙龙和品鉴沟通降低新品牌信任成本，先建立口感、来源和服务认知。',
     role: '信任建立',
     image: finishedWine,
   },
@@ -184,7 +184,7 @@ export const products = [
     label: '到店品鉴 / 样品试单 / 方案确认',
     copy: '作为客户入门和样品确认产品，帮助企业先判断口感、预算带与采购方向。',
     fit: '首次接触客户、样品试单、品鉴会',
-    scene: '预约品鉴、内部选品、礼酒方案确认',
+    scene: '需求沟通、内部选品、礼酒方案确认',
     value: '先建立口感信任，再讨论批量礼赠或企业定制。',
     image: tastingEvent,
   },

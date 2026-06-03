@@ -9,7 +9,7 @@ export default function Footer() {
       </div>
       <div className="footer-actions">
         <Link to="/brand-story">品牌故事</Link>
-        <Link to="/custom">预约品鉴</Link>
+        <Link to="/custom">预约需求</Link>
         <Link to="/coming-soon">更多内容</Link>
       </div>
     </footer>
