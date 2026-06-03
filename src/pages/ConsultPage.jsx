@@ -317,21 +317,33 @@ export default function ConsultPage() {
           </label>
           <label>
             预算范围
-            <input
+            <select
               name="budget"
               value={demand.budget}
               onChange={handleChange}
-              placeholder="例如：5000元左右、1万元以内、3万元以上、暂不确定"
-            />
+            >
+              <option value="">请选择预算范围</option>
+              <option>5000元以内</option>
+              <option>5000-10000元</option>
+              <option>10000-30000元</option>
+              <option>30000元以上</option>
+              <option>暂不确定</option>
+            </select>
           </label>
           <label>
             预计采购数量
-            <input
+            <select
               name="quantity"
               value={demand.quantity}
               onChange={handleChange}
-              placeholder="例如：12瓶、50瓶、100瓶左右、暂不确定"
-            />
+            >
+              <option value="">请选择预计数量</option>
+              <option>10瓶以内</option>
+              <option>10-30瓶</option>
+              <option>30-100瓶</option>
+              <option>100瓶以上</option>
+              <option>暂不确定</option>
+            </select>
           </label>
           <label>
             期望交付时间
@@ -366,10 +378,12 @@ export default function ConsultPage() {
               生成方案建议
               <Sparkles size={18} />
             </button>
+            <div className="secondary-action-row">
             <button className="soft-link dark ghost-button" type="button" onClick={reset} disabled={!hasInput && !result}>
               重新填写
               <RotateCcw size={17} />
             </button>
+            </div>
           </div>
         </form>
       </section>
@@ -409,7 +423,7 @@ export default function ConsultPage() {
                 {result.notes.map((note) => <li key={note}>{note}</li>)}
               </ul>
             </div>
-            <div className="analysis-actions">
+            <div className="analysis-actions result-actions">
               <button className="primary-link form-submit" type="button" onClick={() => setShowCard(true)}>
                 生成我的需求卡
                 <ClipboardList size={18} />
@@ -423,10 +437,12 @@ export default function ConsultPage() {
                 提交给工作人员
                 <ArrowRight size={18} />
               </button>
+              <div className="secondary-action-row">
               <button className="soft-link dark ghost-button" type="button" onClick={reset}>
                 重新填写
               </button>
               <Link className="soft-link dark" to="/custom">预约定制咨询</Link>
+              </div>
             </div>
             <p className="privacy-hint">信息仅用于商务礼酒方案沟通，不会公开展示。</p>
             {submitState.message && (

@@ -96,10 +96,9 @@ export default function Home() {
         <Revealer className="section-title">
           <span className="ghost-title">BUSINESS FIRST</span>
           <p className="eyebrow">商务场景先于产品</p>
-          <h2>不是先问买哪款酒，而是先问这次酒出现在哪个场合。</h2>
+          <h2>先理解场景，再推荐礼酒。</h2>
           <p>
-            企业客户真正需要的，往往不是一张产品清单，而是一套适合接待、答谢、节庆、签约和客户维护的礼酒方案。
-            云酱会客厅先理解关系，再推荐酒体、包装、预算和交付方式。
+            企业客户需要的，往往不是一张产品清单，而是一套适合接待、答谢、节庆、签约和客户维护的礼酒方案。
           </p>
         </Revealer>
         <div className="solution-grid">
@@ -112,12 +111,11 @@ export default function Home() {
         </div>
         <Revealer className="solution-note" delay={160}>
           <p>
-            普通酒厂卖产品；云酱会客厅先理解商务场景，再给出礼酒方案。
-            酒只是载体，真正被交付的是体面、感谢、仪式感和关系表达。
+            云酱会客厅会先看清这批酒的使用场合、赠送对象和关系表达，再建议合适的酒体、包装、预算和交付方式。
           </p>
           <div className="solution-note-actions">
             <Link className="text-link" to="/scenes">进入商务场景页</Link>
-            <Link className="primary-link slim-link" to="/consult">不确定怎么规划？生成初步方案建议</Link>
+            <Link className="primary-link slim-link" to="/consult">生成初步方案建议</Link>
           </div>
         </Revealer>
       </section>

@@ -1595,7 +1595,7 @@ textarea:focus {
 }
 
 .form-submit {
-  width: fit-content;
+  min-width: 210px;
   border: 0;
 }
 
@@ -1663,9 +1663,9 @@ textarea:focus {
 
 .solution-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 12px;
-  max-width: 1120px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 980px;
   margin: 0 auto;
 }
 
@@ -1679,11 +1679,11 @@ textarea:focus {
 }
 
 .solution-chip {
-  min-height: 130px;
+  min-height: 112px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 18px;
+  padding: 18px 20px;
 }
 
 .solution-chip span,
@@ -1696,18 +1696,21 @@ textarea:focus {
 
 .solution-chip strong {
   color: var(--walnut);
-  font-size: 20px;
+  font-size: 24px;
+  line-height: 1.2;
 }
 
 .solution-note {
   display: flex;
-  max-width: 920px;
+  max-width: 980px;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  margin: 30px auto 0;
-  padding: 24px 28px;
+  gap: 28px;
+  margin: 34px auto 0;
+  padding: 28px 34px;
   border-top: 1px solid rgba(76, 47, 25, 0.12);
+  border-radius: 22px;
+  background: rgba(255, 250, 241, 0.42);
 }
 
 .solution-note p {
@@ -1720,12 +1723,14 @@ textarea:focus {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  justify-content: flex-end;
+  justify-content: center;
+  min-width: 280px;
 }
 
 .slim-link {
-  min-height: 42px;
-  padding: 0 18px;
+  min-height: 46px;
+  min-width: 220px;
+  padding: 0 24px;
   font-size: 14px;
 }
 
@@ -2040,8 +2045,35 @@ textarea:focus {
   grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.analysis-actions .primary-link {
+  min-height: 54px;
+  min-width: 235px;
+  padding-inline: 30px;
+  font-size: 16px;
+}
+
+.analysis-actions .soft-link {
+  min-height: 48px;
+  min-width: 190px;
+  padding-inline: 24px;
+}
+
+.result-actions {
+  row-gap: 12px;
+}
+
+.secondary-action-row {
+  flex: 0 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 }
 
 .ghost-button {
@@ -3112,9 +3144,14 @@ textarea:focus {
   .form-actions-row .soft-link,
   .analysis-actions .primary-link,
   .analysis-actions .soft-link,
+  .secondary-action-row,
   .consult-actions .primary-link,
   .consult-actions .soft-link {
     width: 100%;
+  }
+
+  .secondary-action-row {
+    flex-direction: column;
   }
 
   .analysis-section,
