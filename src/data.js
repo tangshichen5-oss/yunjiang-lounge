@@ -73,12 +73,12 @@ export const businessScenes = [
   {
     title: '客户拜访',
     copy: '把来源、包装、预算和交付说清楚，让日常拜访更有分寸。',
-    image: customBottle,
+    image: loungeBar,
   },
   {
     title: '商协会活动',
     copy: '以小型品鉴和礼赠方案进入圈层，把需求沉淀为可复购客户档案。',
-    image: businessReception,
+    image: distilleryAerial,
   },
   {
     title: '年会伴手礼',
@@ -88,7 +88,7 @@ export const businessScenes = [
   {
     title: '客户答谢',
     copy: '用可定制、可解释、可追溯的礼酒，承接长期合作里的温度。',
-    image: corporateGifting,
+    image: finishedWine,
   },
 ];
 
@@ -168,13 +168,13 @@ export const products = [
     title: '基础标准酒',
     label: '到店品鉴 / 样品试单',
     copy: '作为客户入门和样品试单产品，先验证口感、价格带与采购意向。',
-    image: finishedWine,
+    image: tastingEvent,
   },
   {
     title: '收藏纪念酒',
     label: '周年纪念 / 重要节点',
     copy: '为周年庆、合作纪念、客户答谢保留更具仪式感的包装与表达空间。',
-    image: finishedWine,
+    image: jarCellar,
   },
 ];
 

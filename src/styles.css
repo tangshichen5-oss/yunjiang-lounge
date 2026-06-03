@@ -84,8 +84,8 @@ button {
     0 14px 34px rgba(60, 38, 18, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.72),
     inset 0 -1px 0 rgba(120, 80, 40, 0.06);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  backdrop-filter: blur(10px) saturate(160%);
   transform: translateX(-50%);
   transition: min-height 220ms ease, padding 220ms ease, top 220ms ease, box-shadow 220ms ease, transform 220ms ease;
   isolation: isolate;
@@ -734,6 +734,15 @@ p {
   text-shadow: 0 24px 60px rgba(16, 6, 2, 0.46), 0 0 36px rgba(212, 164, 91, 0.2);
 }
 
+.strength-primary strong em,
+.strength-line strong em {
+  margin-left: 0.08em;
+  font-size: 0.42em;
+  font-style: normal;
+  font-weight: 750;
+  vertical-align: baseline;
+}
+
 .strength-primary p {
   margin: 0;
   color: rgba(255, 250, 240, 0.88);
@@ -750,11 +759,11 @@ p {
 
 .strength-line {
   display: flex;
-  min-height: 158px;
+  min-height: 176px;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 20px;
-  padding: 26px 24px;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 26px;
   border: 1px solid rgba(255, 250, 241, 0.14);
   border-radius: 8px;
   background: linear-gradient(180deg, rgba(255, 250, 241, 0.09), rgba(255, 250, 241, 0.025));
@@ -1791,8 +1800,8 @@ textarea:focus {
     background:
       radial-gradient(circle at 22% 10%, rgba(255, 255, 255, 0.2), transparent 28%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 250, 241, 0.22) 100%);
-    -webkit-backdrop-filter: blur(16px) saturate(150%);
-    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    backdrop-filter: blur(10px) saturate(150%);
   }
 
   .topbar.is-compact {
@@ -2038,15 +2047,14 @@ textarea:focus {
 
   .strength-line {
     min-height: auto;
-    display: grid;
-    grid-template-columns: 92px minmax(0, 1fr);
-    gap: 18px;
-    align-items: center;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
     padding: 20px 18px;
   }
 
   .strength-line strong {
-    font-size: 28px;
+    font-size: 31px;
   }
 
   .stat-tile {

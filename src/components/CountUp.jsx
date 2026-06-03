@@ -34,7 +34,7 @@ export default function CountUp({ value, suffix = '' }) {
   return (
     <strong ref={ref}>
       {display}
-      {suffix}
+      {suffix && <em>{suffix}</em>}
     </strong>
   );
 }
