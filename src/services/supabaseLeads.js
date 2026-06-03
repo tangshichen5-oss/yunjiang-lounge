@@ -60,7 +60,7 @@ function getSupabaseConfig() {
   return {
     url: import.meta.env.VITE_SUPABASE_URL,
     anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-    table: import.meta.env.VITE_SUPABASE_LEADS_TABLE || 'leads',
+    table: 'leads',
   };
 }
 
@@ -117,28 +117,74 @@ export function buildLeadData(demand, result, createdAt = new Date().toISOString
   };
 }
 
-async function supabaseRequest(path, options = {}) {
+function createSupabaseRestClient() {
   const { url, anonKey, table } = getSupabaseConfig();
 
   if (!url || !anonKey) {
-    if (import.meta.env.DEV && options.allowDevPreview) {
-      return options.devPreviewValue;
-    }
-    throw new Error('SUPABASE_CONFIG_MISSING');
+    console.error('[云酱会客厅 Supabase 配置缺失]', {
+      hasUrl: Boolean(url),
+      hasAnonKey: Boolean(anonKey),
+      expectedEnv: ['VITE_SUPABASE_URL', 'VITE_SUPABASE_ANON_KEY'],
+    });
+    return null;
   }
 
-  const response = await fetch(`${url.replace(/\/$/, '')}/rest/v1/${table}${path}`, {
-    ...options,
-    headers: getHeaders(anonKey, options.headers),
-  });
+  return {
+    from(requestedTable) {
+      const targetTable = requestedTable || table;
+      return {
+        insert(records) {
+          return {
+            async select() {
+              const response = await fetch(`${url.replace(/\/$/, '')}/rest/v1/${targetTable}`, {
+                method: 'POST',
+                headers: getHeaders(anonKey, {
+                  Prefer: 'return=representation',
+                }),
+                body: JSON.stringify(records),
+              });
 
-  if (!response.ok) {
-    const error = new Error('SUPABASE_REQUEST_FAILED');
-    error.status = response.status;
-    throw error;
-  }
+              const payload = await response.json().catch(() => null);
 
-  return response.json().catch(() => null);
+              if (!response.ok) {
+                const error = {
+                  message: payload?.message || 'Supabase 写入失败',
+                  code: payload?.code || null,
+                  details: payload?.details || null,
+                  hint: payload?.hint || null,
+                  status: response.status,
+                };
+                return { data: null, error };
+              }
+
+              return { data: payload || [], error: null };
+            },
+          };
+        },
+      };
+    },
+    async selectLeads() {
+      const response = await fetch(`${url.replace(/\/$/, '')}/rest/v1/${table}?select=*&order=createdAt.desc`, {
+        method: 'GET',
+        headers: getHeaders(anonKey),
+      });
+
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        const error = {
+          message: payload?.message || 'Supabase 读取失败',
+          code: payload?.code || null,
+          details: payload?.details || null,
+          hint: payload?.hint || null,
+          status: response.status,
+        };
+        return { data: null, error };
+      }
+
+      return { data: payload || [], error: null };
+    },
+  };
 }
 
 export async function submitLead(leadData) {
@@ -147,21 +193,69 @@ export async function submitLead(leadData) {
     return { ok: true, preview: true };
   }
 
-  const result = await supabaseRequest('', {
-    method: 'POST',
-    headers: {
-      Prefer: 'return=representation',
-    },
-    body: JSON.stringify(leadData),
+  if (!leadData.contact?.trim()) {
+    console.error('[云酱会客厅 Supabase 提交失败] contact 为空，RLS 策略要求联系方式不能为空。', {
+      contact: leadData.contact,
+    });
+    throw new Error('LEAD_CONTACT_REQUIRED');
+  }
+
+  const supabase = createSupabaseRestClient();
+
+  if (!supabase) {
+    throw new Error('SUPABASE_CONFIG_MISSING');
+  }
+
+  console.info('[云酱会客厅 Supabase 提交 payload]', {
+    table: 'public.leads',
+    hasUrl: Boolean(import.meta.env.VITE_SUPABASE_URL),
+    hasAnonKey: Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY),
+    contact: leadData.contact,
+    communicationFocusType: Array.isArray(leadData.communicationFocus) ? 'array' : typeof leadData.communicationFocus,
+    warningsType: Array.isArray(leadData.warnings) ? 'array' : typeof leadData.warnings,
+    leadData,
   });
 
-  return { ok: true, data: result?.[0] || null };
+  const { data, error } = await supabase.from('leads').insert([leadData]).select();
+
+  if (error) {
+    console.error('[云酱会客厅 Supabase 提交失败]', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint,
+      status: error.status,
+    });
+    throw new Error(error.message);
+  }
+
+  return { ok: true, data: data?.[0] || null };
 }
 
 export async function fetchLeads() {
-  return supabaseRequest('?select=*&order=createdAt.desc', {
-    method: 'GET',
-    allowDevPreview: true,
-    devPreviewValue: [],
-  });
+  if (import.meta.env.DEV && (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY)) {
+    console.info('[云酱会客厅 Supabase 后台预览] 当前未配置 Supabase 环境变量。');
+    return [];
+  }
+
+  const supabase = createSupabaseRestClient();
+
+  if (!supabase) {
+    throw new Error('SUPABASE_CONFIG_MISSING');
+  }
+
+  const { data, error } = await supabase.selectLeads();
+
+  if (error) {
+    console.error('[云酱会客厅 Supabase 读取失败]', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint,
+      status: error.status,
+    });
+    throw new Error(error.message);
+  }
+
+  return data;
 }
