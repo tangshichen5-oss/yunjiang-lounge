@@ -3,8 +3,13 @@ import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { imageAssets } from '../data.js';
 import Revealer from '../components/Revealer.jsx';
+import { buildLeadData, submitLeadToSheet } from '../services/leadSubmit.js';
 
 const initialDemand = {
+  name: '',
+  contact: '',
+  company: '',
+  city: '',
   scene: '',
   recipient: '',
   budget: '',
@@ -179,6 +184,7 @@ export default function ConsultPage() {
   const [demand, setDemand] = useState(initialDemand);
   const [result, setResult] = useState(null);
   const [showCard, setShowCard] = useState(false);
+  const [submitState, setSubmitState] = useState({ status: 'idle', message: '' });
   const resultRef = useRef(null);
 
   const hasInput = useMemo(() => Object.values(demand).some((value) => value.trim() && value !== '暂不确定'), [demand]);
@@ -193,6 +199,7 @@ export default function ConsultPage() {
     const nextResult = analyzeDemand(demand);
     setResult(nextResult);
     setShowCard(false);
+    setSubmitState({ status: 'idle', message: '' });
     requestAnimationFrame(() => {
       resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
@@ -202,6 +209,34 @@ export default function ConsultPage() {
     setDemand(initialDemand);
     setResult(null);
     setShowCard(false);
+    setSubmitState({ status: 'idle', message: '' });
+  };
+
+  const handleSubmitLead = async () => {
+    if (!result) return;
+    if (!demand.contact.trim()) {
+      setSubmitState({
+        status: 'error',
+        message: '请先填写联系方式，方便工作人员进一步沟通方案。',
+      });
+      return;
+    }
+
+    const leadData = buildLeadData(demand, result);
+    setSubmitState({ status: 'submitting', message: '正在提交给工作人员...' });
+
+    try {
+      await submitLeadToSheet(leadData);
+      setSubmitState({
+        status: 'success',
+        message: '已收到你的商务礼酒需求，工作人员会根据需求卡进一步沟通方案。你也可以截图保存本页，便于后续沟通。',
+      });
+    } catch {
+      setSubmitState({
+        status: 'error',
+        message: '提交暂时失败，请截图保存需求卡，稍后再试或直接联系工作人员。',
+      });
+    }
   };
 
   return (
@@ -220,10 +255,48 @@ export default function ConsultPage() {
         <Revealer className="section-title">
           <p className="eyebrow">Fill In Your Needs</p>
           <h2>填写真实需求，生成初步方案建议。</h2>
-          <p>这是前端规则版分析，不连接 AI、不上传服务器。可以写得很具体，也可以写“暂不确定”。</p>
+          <p>这是前端规则版分析，不连接 AI。生成建议阶段不上传信息，只有点击“提交给工作人员”后才会发送线索。</p>
         </Revealer>
 
         <form className="analysis-form" onSubmit={handleAnalyze}>
+          <div className="contact-fields wide-field">
+            <label>
+              联系人姓名
+              <input
+                name="name"
+                value={demand.name}
+                onChange={handleChange}
+                placeholder="例如：张先生 / 李女士"
+              />
+            </label>
+            <label>
+              联系方式
+              <input
+                name="contact"
+                value={demand.contact}
+                onChange={handleChange}
+                placeholder="请输入手机号或微信号"
+              />
+            </label>
+            <label>
+              公司名称 / 单位名称
+              <input
+                name="company"
+                value={demand.company}
+                onChange={handleChange}
+                placeholder="例如：某某科技有限公司 / 某某商会"
+              />
+            </label>
+            <label>
+              所在城市
+              <input
+                name="city"
+                value={demand.city}
+                onChange={handleChange}
+                placeholder="例如：贵阳 / 深圳 / 珠海"
+              />
+            </label>
+          </div>
           <label className="wide-field">
             使用场景
             <textarea
@@ -341,11 +414,26 @@ export default function ConsultPage() {
                 生成我的需求卡
                 <ClipboardList size={18} />
               </button>
+              <button
+                className="primary-link form-submit"
+                type="button"
+                onClick={handleSubmitLead}
+                disabled={submitState.status === 'submitting'}
+              >
+                提交给工作人员
+                <ArrowRight size={18} />
+              </button>
               <button className="soft-link dark ghost-button" type="button" onClick={reset}>
                 重新填写
               </button>
               <Link className="soft-link dark" to="/custom">预约定制咨询</Link>
             </div>
+            <p className="privacy-hint">信息仅用于商务礼酒方案沟通，不会公开展示。</p>
+            {submitState.message && (
+              <div className={`lead-submit-note ${submitState.status}`}>
+                {submitState.message}
+              </div>
+            )}
           </Revealer>
 
           {showCard && (
@@ -357,6 +445,9 @@ export default function ConsultPage() {
                 <strong>{result.primary.title}</strong>
               </div>
               <dl>
+                <div><dt>联系人</dt><dd>{demand.name || '暂未填写'}</dd></div>
+                <div><dt>联系方式</dt><dd>{demand.contact || '暂未填写'}</dd></div>
+                <div><dt>公司 / 城市</dt><dd>{[demand.company, demand.city].filter(Boolean).join(' / ') || '暂未填写'}</dd></div>
                 <div><dt>使用场景</dt><dd>{demand.scene || '暂不确定'}</dd></div>
                 <div><dt>赠送对象</dt><dd>{demand.recipient || '暂不确定'}</dd></div>
                 <div><dt>预算范围</dt><dd>{demand.budget || '暂不确定'}</dd></div>

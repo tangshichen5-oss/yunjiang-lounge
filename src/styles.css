@@ -2015,6 +2015,16 @@ textarea:focus {
   grid-column: 1 / -1;
 }
 
+.contact-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 22px;
+  border: 1px solid rgba(184, 121, 53, 0.14);
+  border-radius: 20px;
+  background: rgba(255, 250, 241, 0.5);
+}
+
 .analysis-form textarea {
   min-height: 118px;
 }
@@ -2041,6 +2051,41 @@ textarea:focus {
 .ghost-button:disabled {
   cursor: not-allowed;
   opacity: 0.46;
+}
+
+.primary-link:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+  transform: none;
+}
+
+.privacy-hint {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.lead-submit-note {
+  margin-top: 14px;
+  padding: 15px 16px;
+  border-radius: 16px;
+  color: var(--walnut);
+  line-height: 1.7;
+}
+
+.lead-submit-note.success {
+  border: 1px solid rgba(88, 126, 82, 0.24);
+  background: rgba(111, 148, 95, 0.14);
+}
+
+.lead-submit-note.error {
+  border: 1px solid rgba(162, 88, 63, 0.22);
+  background: rgba(184, 121, 88, 0.12);
+}
+
+.lead-submit-note.submitting {
+  border: 1px solid rgba(184, 121, 53, 0.18);
+  background: rgba(184, 121, 53, 0.1);
 }
 
 .analysis-result-section {
@@ -2923,6 +2968,12 @@ textarea:focus {
   .analysis-form {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .contact-fields {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px;
   }
 
   .analysis-form input,
