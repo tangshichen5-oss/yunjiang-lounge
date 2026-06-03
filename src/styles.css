@@ -1716,6 +1716,19 @@ textarea:focus {
   color: var(--muted);
 }
 
+.solution-note-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.slim-link {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
 .page-hero {
   position: relative;
   min-height: 76vh;
@@ -1970,6 +1983,222 @@ textarea:focus {
   justify-content: center;
   gap: 12px;
   margin-top: 28px;
+}
+
+.analysis-section,
+.analysis-result-section {
+  padding: 96px 6vw;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(212, 164, 91, 0.12), transparent 36%),
+    #fbf7ef;
+}
+
+.analysis-form,
+.analysis-result-card,
+.demand-card {
+  max-width: 980px;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.74);
+  border-radius: 24px;
+  background: rgba(255, 250, 241, 0.78);
+  box-shadow: var(--shadow);
+}
+
+.analysis-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 30px;
+}
+
+.analysis-form .wide-field {
+  grid-column: 1 / -1;
+}
+
+.analysis-form textarea {
+  min-height: 118px;
+}
+
+.analysis-form input,
+.analysis-form select,
+.analysis-form textarea {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.analysis-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.ghost-button {
+  border: 1px solid rgba(76, 47, 25, 0.18);
+}
+
+.ghost-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.46;
+}
+
+.analysis-result-section {
+  padding-top: 40px;
+}
+
+.analysis-result-card {
+  padding: 36px;
+}
+
+.analysis-result-card h2 {
+  max-width: 780px;
+}
+
+.combined-plan {
+  display: inline-flex;
+  margin-bottom: 22px;
+  padding: 9px 14px;
+  border: 1px solid rgba(184, 121, 53, 0.18);
+  border-radius: 999px;
+  background: rgba(184, 121, 53, 0.08);
+  color: var(--walnut);
+  font-weight: 800;
+}
+
+.result-block {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(76, 47, 25, 0.12);
+}
+
+.result-block h3,
+.result-config span {
+  color: var(--walnut);
+}
+
+.result-block p,
+.result-block li,
+.result-config p,
+.result-config li {
+  color: var(--muted);
+}
+
+.result-config {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.result-config > div {
+  padding: 20px;
+  border: 1px solid rgba(76, 47, 25, 0.1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.result-config span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--amber);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.result-config ul,
+.result-block ul {
+  padding-left: 20px;
+  margin-bottom: 0;
+}
+
+.demand-card {
+  position: relative;
+  margin-top: 28px;
+  padding: 30px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 241, 0.96), rgba(244, 229, 204, 0.9)),
+    var(--cream);
+}
+
+.demand-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 86% 8%, rgba(212, 164, 91, 0.18), transparent 26%),
+    linear-gradient(90deg, rgba(184, 121, 53, 0.16), transparent 34%);
+  pointer-events: none;
+}
+
+.demand-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card-mark {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: var(--amber);
+  font-weight: 900;
+}
+
+.demand-card h2 {
+  margin-bottom: 18px;
+  color: var(--walnut);
+  font-size: clamp(30px, 5vw, 48px);
+}
+
+.card-recommend {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 18px;
+  border: 1px solid rgba(184, 121, 53, 0.22);
+  border-radius: 18px;
+  background: rgba(255, 250, 241, 0.58);
+}
+
+.card-recommend small {
+  color: var(--amber);
+  font-weight: 900;
+}
+
+.card-recommend strong {
+  color: var(--walnut);
+  font-size: 22px;
+}
+
+.demand-card dl {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.demand-card dl div {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(76, 47, 25, 0.1);
+}
+
+.demand-card dt {
+  color: var(--amber);
+  font-weight: 900;
+}
+
+.demand-card dd {
+  margin: 0;
+  color: var(--walnut);
+}
+
+.demand-card > p {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 14px;
 }
 
 .story-quote {
@@ -2603,7 +2832,9 @@ textarea:focus {
   }
 
   .solution-note,
+  .solution-note-actions,
   .form-actions-row,
+  .analysis-actions,
   .consult-actions {
     align-items: stretch;
     flex-direction: column;
@@ -2670,9 +2901,52 @@ textarea:focus {
 
   .form-actions-row .primary-link,
   .form-actions-row .soft-link,
+  .analysis-actions .primary-link,
+  .analysis-actions .soft-link,
   .consult-actions .primary-link,
   .consult-actions .soft-link {
     width: 100%;
+  }
+
+  .analysis-section,
+  .analysis-result-section {
+    padding: 76px 18px;
+  }
+
+  .analysis-form,
+  .analysis-result-card,
+  .demand-card {
+    border-radius: 20px;
+    padding: 22px;
+  }
+
+  .analysis-form {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .analysis-form input,
+  .analysis-form select,
+  .analysis-form textarea {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .analysis-form textarea {
+    min-height: 132px;
+  }
+
+  .result-config {
+    grid-template-columns: 1fr;
+  }
+
+  .demand-card dl div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .card-recommend strong {
+    font-size: 19px;
   }
 
   .strength-line {

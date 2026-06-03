@@ -115,7 +115,10 @@ export default function Home() {
             普通酒厂卖产品；云酱会客厅先理解商务场景，再给出礼酒方案。
             酒只是载体，真正被交付的是体面、感谢、仪式感和关系表达。
           </p>
-          <Link className="text-link" to="/scenes">进入商务场景页</Link>
+          <div className="solution-note-actions">
+            <Link className="text-link" to="/scenes">进入商务场景页</Link>
+            <Link className="primary-link slim-link" to="/consult">不确定怎么规划？生成初步方案建议</Link>
+          </div>
         </Revealer>
       </section>
 
