@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product }) {
   return (
-    <Link to="/coming-soon" className="product-card">
+    <Link to="/products" className="product-card">
       <div className="product-photo">
         <img src={product.image} alt={product.title} loading="lazy" />
       </div>

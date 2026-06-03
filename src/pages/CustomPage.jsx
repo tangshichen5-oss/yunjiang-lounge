@@ -1,6 +1,6 @@
-import { CheckCircle2, FileText, PackageCheck, Send } from 'lucide-react';
+import { ArrowRight, CheckCircle2, FileText, PackageCheck, Send } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { imageAssets, processSteps } from '../data.js';
 import Revealer from '../components/Revealer.jsx';
 
@@ -8,13 +8,40 @@ const initialForm = {
   company: '',
   contact: '',
   phone: '',
-  budget: '3000-10000元',
+  budget: '先沟通预算',
   quantity: '30-100瓶',
-  scene: '节庆礼赠',
+  scene: '客户答谢',
   packaging: '商务礼盒',
   date: '',
   note: '',
 };
+
+const questions = [
+  '这批酒送给谁',
+  '出现在哪个商务场景',
+  '预算区间和采购数量是多少',
+  '是否用于节庆、签约、周年、答谢或接待',
+  '是否需要企业元素、纪念编号、祝福语或专属礼盒',
+];
+
+const customItems = [
+  '瓶身元素',
+  '标签文案',
+  '企业 logo',
+  '礼盒设计',
+  '祝福语',
+  '纪念编号',
+  '场景化外包装',
+];
+
+const suitableClients = [
+  '企业礼赠',
+  '商协会',
+  '项目签约',
+  '周年纪念',
+  '节庆采购',
+  '高端客户维护',
+];
 
 export default function CustomPage() {
   const location = useLocation();
@@ -46,16 +73,32 @@ export default function CustomPage() {
         <div className="custom-hero-overlay" />
         <Revealer className="custom-hero-copy">
           <p className="eyebrow">Enterprise Customization</p>
-          <h1>企业定制礼酒咨询</h1>
-          <p>从预算、数量、场景和包装开始沟通，让每一次企业礼赠更体面、更可控。</p>
+          <h1>企业定制，不只是把 logo 印在酒瓶上。</h1>
+          <p>云酱会客厅会先理解企业行业、赠送对象、使用场景、预算区间与交付周期，再推荐酒体、包装、标签、礼盒和整体方案。</p>
         </Revealer>
       </section>
 
-      <section className="custom-content" id="booking">
+      <section className="consult-section">
+        <Revealer className="section-title">
+          <p className="eyebrow">Before Customization</p>
+          <h2>定制前，先把关系和场景说清楚。</h2>
+          <p>真正高级的企业定制，不是堆材料，也不是换一个标签。它应该让礼酒在合适的场合里，准确表达企业的分寸和心意。</p>
+        </Revealer>
+        <div className="consult-grid">
+          {questions.map((question, index) => (
+            <Revealer className="consult-card" delay={index * 70} key={question}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{question}</h3>
+            </Revealer>
+          ))}
+        </div>
+      </section>
+
+      <section className="custom-content custom-content-rich" id="booking">
         <aside className="process-glass">
           <div className="process-title">
             <PackageCheck size={24} />
-            <h2>定制流程</h2>
+            <h2>顾问式定制流程</h2>
           </div>
           {processSteps.map((step, index) => (
             <div className="process-row" key={step}>
@@ -63,14 +106,26 @@ export default function CustomPage() {
               <p>{step}</p>
             </div>
           ))}
+          <div className="custom-mini-block">
+            <h3>可沟通内容</h3>
+            <div className="tag-cloud">
+              {customItems.map((item) => <span key={item}>{item}</span>)}
+            </div>
+          </div>
+          <div className="custom-mini-block">
+            <h3>适用客户</h3>
+            <div className="tag-cloud">
+              {suitableClients.map((item) => <span key={item}>{item}</span>)}
+            </div>
+          </div>
         </aside>
 
         <form className="booking-form" onSubmit={handleSubmit}>
           <div className="form-heading">
             <FileText size={24} />
             <div>
-              <h2>预约咨询表单</h2>
-              <p>当前表单为前端演示，不会真实提交后端。</p>
+              <h2>预约定制咨询</h2>
+              <p>先留下基础需求，后续可升级为“商务礼酒方案分析 + 需求卡生成”。当前表单为前端演示，不连接后台。</p>
             </div>
           </div>
           <div className="form-grid">
@@ -89,6 +144,7 @@ export default function CustomPage() {
             <label>
               预算区间
               <select name="budget" value={form.budget} onChange={handleChange}>
+                <option>先沟通预算</option>
                 <option>3000-10000元</option>
                 <option>10000-30000元</option>
                 <option>30000-50000元</option>
@@ -107,20 +163,21 @@ export default function CustomPage() {
             <label>
               使用场景
               <select name="scene" value={form.scene} onChange={handleChange}>
-                <option>节庆礼赠</option>
                 <option>客户答谢</option>
+                <option>节庆礼赠</option>
+                <option>项目签约</option>
                 <option>商协会活动</option>
                 <option>周年纪念</option>
-                <option>宴席渠道</option>
+                <option>企业接待</option>
               </select>
             </label>
             <label>
-              包装需求
+              包装方向
               <select name="packaging" value={form.packaging} onChange={handleChange}>
                 <option>商务礼盒</option>
                 <option>企业标签定制</option>
                 <option>活动主题包装</option>
-                <option>渠道专供包装</option>
+                <option>纪念编号礼盒</option>
               </select>
             </label>
             <label>
@@ -134,13 +191,19 @@ export default function CustomPage() {
               name="note"
               value={form.note}
               onChange={handleChange}
-              placeholder="可填写口感偏好、礼盒风格、标签文案方向、品鉴人数或其他交付要求"
+              placeholder="可填写赠送对象、使用场合、企业元素、祝福语方向、品鉴人数或其他交付要求"
             />
           </label>
-          <button className="primary-link form-submit" type="submit">
-            生成咨询记录
-            <Send size={18} />
-          </button>
+          <div className="form-actions-row">
+            <button className="primary-link form-submit" type="submit">
+              生成咨询记录
+              <Send size={18} />
+            </button>
+            <Link className="soft-link dark" to="/consult">
+              预约定制咨询
+              <ArrowRight size={18} />
+            </Link>
+          </div>
           {submitted && (
             <div className="submit-note">
               <CheckCircle2 size={18} />

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function ImageCard({ item, className = '', large = false }) {
   return (
-    <Link to="/coming-soon" className={`image-card ${large ? 'image-card-large' : ''} ${className}`}>
+    <Link to={item.to || '/scenes'} className={`image-card ${large ? 'image-card-large' : ''} ${className}`}>
       <img src={item.image} alt={item.title} loading="lazy" />
       <div className="image-card-copy">
         <span>{item.label || 'Yunjiang Lounge'}</span>

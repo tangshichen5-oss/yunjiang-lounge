@@ -83,22 +83,61 @@ export default function Home() {
           </h1>
           <p className="hero-subtitle hero-layer hero-layer-3">来自贵州酱酒产区的商务礼酒解决方案</p>
           <div className="hero-actions hero-layer hero-layer-4">
-            <Link className="primary-link" to="/custom">
-              预约品鉴
+            <Link className="primary-link" to="/consult">
+              预约方案咨询
               <ArrowRight size={18} />
             </Link>
-            <a className="soft-link" href="#experience">了解会客厅</a>
+            <Link className="soft-link" to="/scenes">先看商务场景</Link>
           </div>
         </Revealer>
       </section>
+
+      <section className="solution-primer story-section">
+        <Revealer className="section-title">
+          <span className="ghost-title">BUSINESS FIRST</span>
+          <p className="eyebrow">商务场景先于产品</p>
+          <h2>不是先问买哪款酒，而是先问这次酒出现在哪个场合。</h2>
+          <p>
+            企业客户真正需要的，往往不是一张产品清单，而是一套适合接待、答谢、节庆、签约和客户维护的礼酒方案。
+            云酱会客厅先理解关系，再推荐酒体、包装、预算和交付方式。
+          </p>
+        </Revealer>
+        <div className="solution-grid">
+          {['企业接待', '客户答谢', '节庆礼赠', '签约宴请', '企业定制', '品鉴会'].map((item, index) => (
+            <Revealer className="solution-chip" delay={index * 60} key={item}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <strong>{item}</strong>
+            </Revealer>
+          ))}
+        </div>
+        <Revealer className="solution-note" delay={160}>
+          <p>
+            普通酒厂卖产品；云酱会客厅先理解商务场景，再给出礼酒方案。
+            酒只是载体，真正被交付的是体面、感谢、仪式感和关系表达。
+          </p>
+          <Link className="text-link" to="/scenes">进入商务场景页</Link>
+        </Revealer>
+      </section>
+
+      <HorizontalRail
+        id="scenes"
+        eyebrow="Business Scenes"
+        title="先看场景，再谈产品"
+        copy="不同商务场景下，酒承担的角色不同：有时是体面，有时是感谢，有时是关系维护，有时是仪式感。"
+      >
+        {businessScenes.map((scene) => (
+          <ImageCard item={scene} large key={scene.title} />
+        ))}
+      </HorizontalRail>
 
       <section className="brand-intro story-section">
         <Revealer className="section-title">
           <span className="ghost-title">BRAND STORY</span>
           <p className="eyebrow">品牌故事</p>
-          <h2>从产区资源，到城市商务会客厅</h2>
+          <h2>酒从山里来，关系发生在城市里</h2>
           <p>
-            云酱会客厅不是一个单纯卖酒的页面，而是把贵州酱香酒生产资源、企业礼赠需求和本地商务接待场景连接起来。前端以会客厅建立信任，后端以真实生产资源支撑交付。
+            云酱会客厅的意义，是把产区里的酿造资源，带到城市的商务关系里。
+            真正重要的，不只是把酒卖出去，而是让它出现在合适的场合。
           </p>
         </Revealer>
         <div className="intro-grid">
@@ -106,25 +145,15 @@ export default function Home() {
             <img src={imageAssets.distilleryAerial} alt="贵州酱酒产区酒厂航拍" loading="lazy" />
           </Revealer>
           <Revealer className="intro-copy" delay={120}>
-            <h3>轻前端验证，重后端支撑</h3>
+            <h3>一端连接产区，一端连接商务往来</h3>
             <p>
-              项目以贵阳样板空间为起点，通过品鉴会、企业邀约、商协会资源和私域运营，逐步验证客户需求、价格带、毛利结构和复购周期。
+              会客厅不是货架，而是企业客户理解来源、判断品质、沟通预算和确认礼赠方案的地方。
+              背后的酒厂资源，负责让每一次接待和定制都有稳定交付的底气。
             </p>
             <Link className="text-link" to="/brand-story">阅读完整品牌故事</Link>
           </Revealer>
         </div>
       </section>
-
-      <HorizontalRail
-        id="scenes"
-        eyebrow="Business Scenes"
-        title="商务场景先于产品"
-        copy="企业客户真正关心的，是一次礼赠是否体面、来源是否可解释、交付是否稳定。"
-      >
-        {businessScenes.map((scene) => (
-          <ImageCard item={scene} large key={scene.title} />
-        ))}
-      </HorizontalRail>
 
       <section id="strength" className="strength-section">
         <img src={imageAssets.fermentationPits} alt="酒厂窖池与生产实力背景" loading="lazy" />
@@ -208,8 +237,8 @@ export default function Home() {
       <HorizontalRail
         id="products"
         eyebrow="Product System"
-        title="产品体系，为商务场景服务"
-        copy="产品不以电商货架呈现，而作为企业礼赠、定制、品鉴和纪念场景中的解决方案。"
+        title="产品体系，只为商务场景服务"
+        copy="每一类产品都对应明确的赠送对象、使用场景和关系表达，不做促销货架。"
       >
         {products.map((product) => (
           <ProductCard product={product} key={product.title} />
@@ -249,7 +278,8 @@ export default function Home() {
       <section className="faq-section story-section">
         <Revealer className="section-title">
           <p className="eyebrow">FAQ</p>
-          <h2>企业客户常见问题</h2>
+          <h2>你真正关心的，不只是酒本身。</h2>
+          <p>常见问题，先说清楚。预算、定制、交付和数字化服务，都应该在咨询前有基本答案。</p>
         </Revealer>
         <div className="faq-list">
           {faqs.map((faq, index) => (
@@ -266,7 +296,7 @@ export default function Home() {
         <div className="final-cta-copy">
           <p className="eyebrow">Book A Tasting</p>
           <h2>为下一次企业礼赠，先预约一次品鉴</h2>
-          <Link className="primary-link" to="/custom">
+          <Link className="primary-link" to="/consult">
             进入预约咨询
             <ArrowRight size={18} />
           </Link>
