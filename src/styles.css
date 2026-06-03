@@ -1561,6 +1561,14 @@ p {
   gap: 16px;
 }
 
+.form-control {
+  display: grid;
+  gap: 9px;
+  color: var(--walnut);
+  font-size: 14px;
+  font-weight: 800;
+}
+
 label {
   display: grid;
   gap: 9px;
@@ -1587,11 +1595,123 @@ textarea {
   resize: vertical;
 }
 
+.booking-form input,
+.booking-form textarea {
+  min-height: 50px;
+  border-color: rgba(76, 47, 25, 0.16);
+  border-radius: 16px;
+  background: rgba(255, 250, 241, 0.78);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.46);
+}
+
 input:focus,
 select:focus,
 textarea:focus {
   border-color: rgba(184, 121, 53, 0.58);
   box-shadow: 0 0 0 4px rgba(184, 121, 53, 0.12);
+}
+
+.custom-select-field {
+  position: relative;
+}
+
+.field-label {
+  color: var(--walnut);
+}
+
+.custom-select {
+  position: relative;
+  z-index: 3;
+}
+
+.custom-select.is-open {
+  z-index: 40;
+}
+
+.custom-select-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 15px 0 16px;
+  border: 1px solid rgba(76, 47, 25, 0.16);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 247, 0.92), rgba(250, 239, 222, 0.78));
+  color: var(--ink);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.58),
+    0 10px 24px rgba(68, 40, 18, 0.06);
+  font-weight: 650;
+  text-align: left;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.custom-select-trigger svg {
+  flex: 0 0 auto;
+  color: var(--amber);
+  transition: transform 180ms ease;
+}
+
+.custom-select.is-open .custom-select-trigger svg {
+  transform: rotate(180deg);
+}
+
+.custom-select-trigger:hover {
+  border-color: rgba(184, 121, 53, 0.34);
+  background:
+    linear-gradient(180deg, rgba(255, 253, 247, 0.98), rgba(251, 241, 226, 0.86));
+}
+
+.custom-select-trigger:focus-visible {
+  border-color: rgba(184, 121, 53, 0.58);
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(184, 121, 53, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.62);
+}
+
+.custom-select-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: grid;
+  gap: 4px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 8px;
+  border: 1px solid rgba(184, 121, 53, 0.2);
+  border-radius: 18px;
+  background: rgba(255, 250, 241, 0.98);
+  box-shadow: 0 24px 58px rgba(68, 40, 18, 0.18);
+}
+
+.custom-select-option {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--walnut);
+  font-weight: 650;
+  text-align: left;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.custom-select-option:hover,
+.custom-select-option:focus-visible {
+  outline: none;
+  background: rgba(184, 121, 53, 0.1);
+}
+
+.custom-select-option.is-selected {
+  background: rgba(212, 164, 91, 0.2);
+  color: #3c2112;
 }
 
 .form-submit {
@@ -1929,30 +2049,6 @@ textarea:focus {
   margin-top: 34px;
   color: var(--walnut);
   font-size: 21px;
-}
-
-.custom-mini-block {
-  margin-top: 26px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(76, 47, 25, 0.1);
-}
-
-.custom-mini-block h3 {
-  font-size: 18px;
-}
-
-.tag-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tag-cloud span {
-  padding: 7px 10px;
-  border: 1px solid rgba(76, 47, 25, 0.12);
-  background: rgba(255, 250, 241, 0.58);
-  color: var(--muted);
-  font-size: 13px;
 }
 
 .page-cta {

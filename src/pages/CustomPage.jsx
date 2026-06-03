@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, FileText, PackageCheck, Send } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronDown, FileText, PackageCheck, Send } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { imageAssets, processSteps } from '../data.js';
@@ -9,7 +9,7 @@ const initialForm = {
   contact: '',
   phone: '',
   budget: '先沟通预算',
-  quantity: '30-100瓶',
+  quantity: '30瓶以下',
   scene: '客户答谢',
   packaging: '商务礼盒',
   date: '',
@@ -24,29 +24,66 @@ const questions = [
   '是否需要企业元素、纪念编号、祝福语或专属礼盒',
 ];
 
-const customItems = [
-  '瓶身元素',
-  '标签文案',
-  '企业 logo',
-  '礼盒设计',
-  '祝福语',
-  '纪念编号',
-  '场景化外包装',
-];
+const selectOptions = {
+  budget: ['先沟通预算', '3000-10000元', '10000-30000元', '30000-50000元', '50000元以上'],
+  quantity: ['30瓶以下', '30-100瓶', '100-300瓶', '300-800瓶', '800瓶以上', '暂不确定'],
+  scene: ['客户答谢', '节庆礼赠', '项目签约', '商协会活动', '周年纪念', '企业接待'],
+  packaging: ['商务礼盒', '企业标签定制', '活动主题包装', '纪念编号礼盒'],
+};
 
-const suitableClients = [
-  '企业礼赠',
-  '商协会',
-  '项目签约',
-  '周年纪念',
-  '节庆采购',
-  '高端客户维护',
-];
+function CustomSelect({ label, name, value, options, openSelect, setOpenSelect, onChange }) {
+  const isOpen = openSelect === name;
+
+  return (
+    <div
+      className="form-control custom-select-field"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setOpenSelect(null);
+        }
+      }}
+    >
+      <span className="field-label">{label}</span>
+      <div className={isOpen ? 'custom-select is-open' : 'custom-select'}>
+        <button
+          type="button"
+          className="custom-select-trigger"
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+          onClick={() => setOpenSelect(isOpen ? null : name)}
+        >
+          <span>{value}</span>
+          <ChevronDown size={18} />
+        </button>
+        {isOpen && (
+          <div className="custom-select-menu" role="listbox" tabIndex={-1}>
+            {options.map((option) => (
+              <button
+                type="button"
+                role="option"
+                aria-selected={option === value}
+                className={option === value ? 'custom-select-option is-selected' : 'custom-select-option'}
+                key={option}
+                onClick={() => {
+                  onChange(name, option);
+                  setOpenSelect(null);
+                }}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function CustomPage() {
   const location = useLocation();
   const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
+  const [openSelect, setOpenSelect] = useState(null);
 
   useEffect(() => {
     const hash = location.state?.hash;
@@ -58,6 +95,10 @@ export default function CustomPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    setForm((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleSelectChange = (name, value) => {
     setForm((current) => ({ ...current, [name]: value }));
   };
 
@@ -106,18 +147,6 @@ export default function CustomPage() {
               <p>{step}</p>
             </div>
           ))}
-          <div className="custom-mini-block">
-            <h3>可沟通内容</h3>
-            <div className="tag-cloud">
-              {customItems.map((item) => <span key={item}>{item}</span>)}
-            </div>
-          </div>
-          <div className="custom-mini-block">
-            <h3>适用客户</h3>
-            <div className="tag-cloud">
-              {suitableClients.map((item) => <span key={item}>{item}</span>)}
-            </div>
-          </div>
         </aside>
 
         <form className="booking-form" onSubmit={handleSubmit}>
@@ -141,45 +170,10 @@ export default function CustomPage() {
               联系方式
               <input name="phone" value={form.phone} onChange={handleChange} placeholder="手机号或微信" />
             </label>
-            <label>
-              预算区间
-              <select name="budget" value={form.budget} onChange={handleChange}>
-                <option>先沟通预算</option>
-                <option>3000-10000元</option>
-                <option>10000-30000元</option>
-                <option>30000-50000元</option>
-                <option>50000元以上</option>
-              </select>
-            </label>
-            <label>
-              采购数量
-              <select name="quantity" value={form.quantity} onChange={handleChange}>
-                <option>30-100瓶</option>
-                <option>100-300瓶</option>
-                <option>300-800瓶</option>
-                <option>800瓶以上</option>
-              </select>
-            </label>
-            <label>
-              使用场景
-              <select name="scene" value={form.scene} onChange={handleChange}>
-                <option>客户答谢</option>
-                <option>节庆礼赠</option>
-                <option>项目签约</option>
-                <option>商协会活动</option>
-                <option>周年纪念</option>
-                <option>企业接待</option>
-              </select>
-            </label>
-            <label>
-              包装方向
-              <select name="packaging" value={form.packaging} onChange={handleChange}>
-                <option>商务礼盒</option>
-                <option>企业标签定制</option>
-                <option>活动主题包装</option>
-                <option>纪念编号礼盒</option>
-              </select>
-            </label>
+            <CustomSelect label="预算区间" name="budget" value={form.budget} options={selectOptions.budget} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
+            <CustomSelect label="采购数量" name="quantity" value={form.quantity} options={selectOptions.quantity} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
+            <CustomSelect label="使用场景" name="scene" value={form.scene} options={selectOptions.scene} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
+            <CustomSelect label="包装方向" name="packaging" value={form.packaging} options={selectOptions.packaging} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
             <label>
               期望交付时间
               <input name="date" type="date" value={form.date} onChange={handleChange} />
