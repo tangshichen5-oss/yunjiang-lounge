@@ -77,12 +77,13 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 999px;
   background:
-    radial-gradient(circle at 22% 10%, rgba(255, 255, 255, 0.28), transparent 26%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 250, 241, 0.34) 100%);
+    radial-gradient(circle at 18% 8%, rgba(255, 255, 255, 0.18), transparent 24%),
+    radial-gradient(circle at 86% 92%, rgba(255, 239, 210, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 250, 241, 0.16) 100%);
   box-shadow:
-    0 18px 45px rgba(60, 38, 18, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    inset 0 -1px 0 rgba(120, 80, 40, 0.08);
+    0 14px 34px rgba(60, 38, 18, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    inset 0 -1px 0 rgba(120, 80, 40, 0.06);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   backdrop-filter: blur(18px) saturate(160%);
   transform: translateX(-50%);
@@ -94,10 +95,10 @@ button {
   content: "";
   position: absolute;
   inset: 2px 18px auto;
-  height: 25px;
+  height: 23px;
   border-radius: 999px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.1) 68%, rgba(255, 255, 255, 0));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0.08) 70%, rgba(255, 255, 255, 0));
   pointer-events: none;
   z-index: 0;
 }
@@ -107,11 +108,14 @@ button {
   position: absolute;
   inset: 0;
   border-radius: inherit;
+  background:
+    linear-gradient(112deg, transparent 9%, rgba(255, 255, 255, 0.16) 18%, transparent 31%),
+    linear-gradient(285deg, transparent 64%, rgba(255, 242, 220, 0.1) 76%, transparent 88%);
   pointer-events: none;
   box-shadow:
-    inset 1px 0 1px rgba(255, 255, 255, 0.62),
-    inset -1px 0 1px rgba(120, 80, 40, 0.08),
-    inset 0 0 18px rgba(255, 255, 255, 0.15);
+    inset 1px 0 1px rgba(255, 255, 255, 0.52),
+    inset -1px 0 1px rgba(120, 80, 40, 0.06),
+    inset 0 0 16px rgba(255, 255, 255, 0.09);
   z-index: 0;
 }
 
@@ -120,8 +124,8 @@ button {
   min-height: 56px;
   padding: 6px 11px;
   box-shadow:
-    0 14px 38px rgba(60, 38, 18, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    0 12px 30px rgba(60, 38, 18, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.68),
     inset 0 -1px 0 rgba(120, 80, 40, 0.08);
   transform: translateX(-50%) scale(0.985);
 }
@@ -1785,8 +1789,8 @@ textarea:focus {
     width: calc(100% - 24px);
     min-height: 64px;
     background:
-      radial-gradient(circle at 22% 10%, rgba(255, 255, 255, 0.3), transparent 28%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 250, 241, 0.42) 100%);
+      radial-gradient(circle at 22% 10%, rgba(255, 255, 255, 0.2), transparent 28%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 250, 241, 0.22) 100%);
     -webkit-backdrop-filter: blur(16px) saturate(150%);
     backdrop-filter: blur(16px) saturate(150%);
   }
