@@ -3,7 +3,7 @@ import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { imageAssets } from '../data.js';
 import Revealer from '../components/Revealer.jsx';
-import { buildLeadData, submitLeadToSheet } from '../services/leadSubmit.js';
+import { buildLeadData, submitLead } from '../services/supabaseLeads.js';
 
 const initialDemand = {
   name: '',
@@ -226,10 +226,10 @@ export default function ConsultPage() {
     setSubmitState({ status: 'submitting', message: '正在提交给工作人员...' });
 
     try {
-      await submitLeadToSheet(leadData);
+      await submitLead(leadData);
       setSubmitState({
         status: 'success',
-        message: '已收到你的商务礼酒需求，工作人员会根据需求卡进一步沟通方案。你也可以截图保存本页，便于后续沟通。',
+        message: '已收到你的商务礼酒需求，工作人员会进一步沟通方案。',
       });
     } catch {
       setSubmitState({
