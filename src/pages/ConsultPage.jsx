@@ -2,6 +2,8 @@ import { ArrowRight, ClipboardList, RotateCcw, Sparkles } from 'lucide-react';
 import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { imageAssets } from '../data.js';
+import { consultationOptions } from '../data/formOptions.js';
+import BrandSelect from '../components/BrandSelect.jsx';
 import Revealer from '../components/Revealer.jsx';
 import { buildLeadData, submitLead } from '../services/supabaseLeads.js';
 
@@ -185,12 +187,17 @@ export default function ConsultPage() {
   const [result, setResult] = useState(null);
   const [showCard, setShowCard] = useState(false);
   const [submitState, setSubmitState] = useState({ status: 'idle', message: '' });
+  const [openSelect, setOpenSelect] = useState(null);
   const resultRef = useRef(null);
 
   const hasInput = useMemo(() => Object.values(demand).some((value) => value.trim() && value !== '暂不确定'), [demand]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    setDemand((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleSelectChange = (name, value) => {
     setDemand((current) => ({ ...current, [name]: value }));
   };
 
@@ -315,46 +322,9 @@ export default function ConsultPage() {
               placeholder="例如：重要客户、合作伙伴、商协会嘉宾、企业内部员工等"
             />
           </label>
-          <label>
-            预算范围
-            <select
-              name="budget"
-              value={demand.budget}
-              onChange={handleChange}
-            >
-              <option value="">请选择预算范围</option>
-              <option>5000元以内</option>
-              <option>5000-10000元</option>
-              <option>10000-30000元</option>
-              <option>30000元以上</option>
-              <option>暂不确定</option>
-            </select>
-          </label>
-          <label>
-            预计采购数量
-            <select
-              name="quantity"
-              value={demand.quantity}
-              onChange={handleChange}
-            >
-              <option value="">请选择预计数量</option>
-              <option>10瓶以内</option>
-              <option>10-30瓶</option>
-              <option>30-100瓶</option>
-              <option>100瓶以上</option>
-              <option>暂不确定</option>
-            </select>
-          </label>
-          <label>
-            期望交付时间
-            <select name="delivery" value={demand.delivery} onChange={handleChange}>
-              <option>15天内</option>
-              <option>30天内</option>
-              <option>45天内</option>
-              <option>60天以上</option>
-              <option>暂不确定</option>
-            </select>
-          </label>
+          <BrandSelect label="预算范围" name="budget" value={demand.budget} placeholder="请选择预算范围" options={consultationOptions.budget} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
+          <BrandSelect label="预计采购数量" name="quantity" value={demand.quantity} placeholder="请选择预计数量" options={consultationOptions.quantity} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
+          <BrandSelect label="期望交付时间" name="delivery" value={demand.delivery} options={consultationOptions.delivery} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
           <label className="wide-field">
             包装或定制需求
             <textarea

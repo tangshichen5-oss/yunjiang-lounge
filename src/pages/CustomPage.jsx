@@ -1,14 +1,16 @@
-import { ArrowRight, CheckCircle2, ChevronDown, FileText, PackageCheck, Send } from 'lucide-react';
+import { ArrowRight, CheckCircle2, FileText, PackageCheck, Send } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { imageAssets, processSteps } from '../data.js';
+import { consultationOptions } from '../data/formOptions.js';
+import BrandSelect from '../components/BrandSelect.jsx';
 import Revealer from '../components/Revealer.jsx';
 
 const initialForm = {
   company: '',
   contact: '',
   phone: '',
-  budget: '先沟通预算',
+  budget: '暂不确定',
   quantity: '30瓶以下',
   scene: '客户答谢',
   packaging: '商务礼盒',
@@ -23,61 +25,6 @@ const questions = [
   '是否用于节庆、签约、周年、答谢或接待',
   '是否需要企业元素、纪念编号、祝福语或专属礼盒',
 ];
-
-const selectOptions = {
-  budget: ['先沟通预算', '3000-10000元', '10000-30000元', '30000-50000元', '50000元以上'],
-  quantity: ['30瓶以下', '30-100瓶', '100-300瓶', '300-800瓶', '800瓶以上', '暂不确定'],
-  scene: ['客户答谢', '节庆礼赠', '项目签约', '商协会活动', '周年纪念', '企业接待'],
-  packaging: ['商务礼盒', '企业标签定制', '活动主题包装', '纪念编号礼盒'],
-};
-
-function CustomSelect({ label, name, value, options, openSelect, setOpenSelect, onChange }) {
-  const isOpen = openSelect === name;
-
-  return (
-    <div
-      className="form-control custom-select-field"
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) {
-          setOpenSelect(null);
-        }
-      }}
-    >
-      <span className="field-label">{label}</span>
-      <div className={isOpen ? 'custom-select is-open' : 'custom-select'}>
-        <button
-          type="button"
-          className="custom-select-trigger"
-          aria-haspopup="listbox"
-          aria-expanded={isOpen}
-          onClick={() => setOpenSelect(isOpen ? null : name)}
-        >
-          <span>{value}</span>
-          <ChevronDown size={18} />
-        </button>
-        {isOpen && (
-          <div className="custom-select-menu" role="listbox" tabIndex={-1}>
-            {options.map((option) => (
-              <button
-                type="button"
-                role="option"
-                aria-selected={option === value}
-                className={option === value ? 'custom-select-option is-selected' : 'custom-select-option'}
-                key={option}
-                onClick={() => {
-                  onChange(name, option);
-                  setOpenSelect(null);
-                }}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
 
 export default function CustomPage() {
   const location = useLocation();
@@ -170,10 +117,10 @@ export default function CustomPage() {
               联系方式
               <input name="phone" value={form.phone} onChange={handleChange} placeholder="手机号或微信" />
             </label>
-            <CustomSelect label="预算区间" name="budget" value={form.budget} options={selectOptions.budget} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
-            <CustomSelect label="采购数量" name="quantity" value={form.quantity} options={selectOptions.quantity} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
-            <CustomSelect label="使用场景" name="scene" value={form.scene} options={selectOptions.scene} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
-            <CustomSelect label="包装方向" name="packaging" value={form.packaging} options={selectOptions.packaging} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
+            <BrandSelect label="预算区间" name="budget" value={form.budget} options={consultationOptions.budget} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
+            <BrandSelect label="采购数量" name="quantity" value={form.quantity} options={consultationOptions.quantity} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
+            <BrandSelect label="使用场景" name="scene" value={form.scene} options={consultationOptions.scene} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
+            <BrandSelect label="包装方向" name="packaging" value={form.packaging} options={consultationOptions.packaging} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
             <label>
               期望交付时间
               <input name="date" type="date" value={form.date} onChange={handleChange} />
