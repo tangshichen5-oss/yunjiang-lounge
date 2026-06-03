@@ -45,7 +45,7 @@ export default function Home() {
               预约品鉴
               <ArrowRight size={18} />
             </Link>
-            <Link className="soft-link" to="/coming-soon">了解会客厅</Link>
+            <a className="soft-link" href="#experience">了解会客厅</a>
           </div>
         </Revealer>
       </section>
@@ -68,7 +68,7 @@ export default function Home() {
             <p>
               项目以贵阳样板空间为起点，通过品鉴会、企业邀约、商协会资源和私域运营，逐步验证客户需求、价格带、毛利结构和复购周期。
             </p>
-            <Link className="text-link" to="/coming-soon">阅读完整品牌故事</Link>
+            <Link className="text-link" to="/brand-story">阅读完整品牌故事</Link>
           </Revealer>
         </div>
       </section>
@@ -108,13 +108,15 @@ export default function Home() {
           <span className="ghost-title">BREWING STORY</span>
           <p className="eyebrow">酿造故事</p>
           <h2>从一粒高粱，到一瓶商务礼酒</h2>
+          <p>产区环境、七道主工序、成酒展示、产品体系与会客厅体验，构成云酱礼酒的完整叙事。</p>
         </Revealer>
         <div className="craft-list">
+          <div className="craft-progress-line" />
           {craftSteps.map((step, index) => (
-            <article className="craft-step" key={step.title}>
+            <article className={`craft-step craft-tone-${step.tone || 'default'}`} key={`${step.kicker}-${step.title}`}>
               <img src={step.image} alt={step.title} loading="lazy" />
               <Revealer className="craft-copy">
-                <span>{String(index + 1).padStart(2, '0')}</span>
+                <span>{step.kicker || String(index + 1).padStart(2, '0')}</span>
                 <h3>{step.title}</h3>
                 <p>{step.subtitle}</p>
               </Revealer>

@@ -8,6 +8,7 @@ export default function Footer() {
         <p>高端商务会客厅 + 酒厂品牌背书 + 商务礼酒解决方案</p>
       </div>
       <div className="footer-actions">
+        <Link to="/brand-story">品牌故事</Link>
         <Link to="/custom">预约品鉴</Link>
         <Link to="/coming-soon">更多内容</Link>
       </div>

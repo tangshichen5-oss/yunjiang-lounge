@@ -1,5 +1,5 @@
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { navItems } from '../data.js';
 
@@ -7,8 +7,16 @@ const navMarks = ['厅', '礼', '酿', '厂', '定', '品'];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 24);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
 
   const go = (item) => {
     setOpen(false);
@@ -20,7 +28,7 @@ export default function Header() {
   };
 
   return (
-    <header className="topbar">
+    <header className={scrolled ? 'topbar is-compact' : 'topbar'}>
       <Link className="brand" to="/">
         <span className="brand-symbol">云</span>
         <span>
