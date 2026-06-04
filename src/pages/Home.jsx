@@ -115,9 +115,9 @@ export default function Home() {
           </p>
           <div className="solution-note-actions">
             <Link className="scenario-cta-title" to="/scenes">进入商务场景页</Link>
-            <Link className="primary-link slim-link" to="/consult">生成初步方案建议</Link>
           </div>
         </Revealer>
+        <Link className="primary-link scenario-primary-cta" to="/consult">生成初步方案建议</Link>
       </section>
 
       <HorizontalRail

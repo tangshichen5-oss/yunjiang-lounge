@@ -1294,8 +1294,16 @@ p {
 .final-cta-copy {
   position: relative;
   z-index: 1;
-  width: min(820px, calc(100% - 36px));
+  width: min(1180px, calc(100% - 36px));
   text-align: center;
+}
+
+.final-cta-copy h2 {
+  margin-bottom: 34px;
+}
+
+.final-cta-copy .primary-link {
+  margin-top: 4px;
 }
 
 .brand-story-page {
@@ -1858,38 +1866,48 @@ textarea:focus {
   .solution-note {
     display: grid;
     max-width: 1060px;
-    grid-template-columns: minmax(0, 1fr) 340px;
+    grid-template-columns: minmax(0, 1fr) 310px;
     align-items: center;
-    gap: 54px;
+    gap: 72px;
     margin-top: 44px;
-    padding: 44px 48px;
+    padding: 36px 48px;
   }
 
   .solution-note p {
-    max-width: 640px;
+    max-width: none;
     font-size: 18px;
     line-height: 1.9;
   }
 
   .solution-note-actions {
     min-width: 0;
-    flex-direction: column;
+    min-height: 96px;
+    flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
-    justify-content: center;
-    gap: 18px;
+    justify-content: flex-start;
+    border-top: 1px solid rgba(76, 47, 25, 0.18);
   }
 
   .scenario-cta-title {
     color: var(--walnut);
-    font-size: 21px;
+    font-size: 25px;
     font-weight: 900;
   }
 
-  .solution-note-actions .slim-link {
-    min-width: 300px;
+  .scenario-primary-cta {
+    display: flex;
+    width: fit-content;
+    min-width: 320px;
     min-height: 58px;
+    margin: 34px auto 0;
+    padding: 0 42px;
     font-size: 16px;
+  }
+
+  .final-cta-copy h2 {
+    white-space: nowrap;
+    font-size: clamp(54px, 5.1vw, 76px);
   }
 }
 
