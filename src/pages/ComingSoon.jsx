@@ -18,7 +18,7 @@ export default function ComingSoon() {
             </Link>
             <Link className="primary-link" to="/custom">
               <CalendarCheck size={18} />
-              预约需求
+              预约
             </Link>
           </div>
         </div>

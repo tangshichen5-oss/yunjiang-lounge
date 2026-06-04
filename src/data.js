@@ -46,7 +46,7 @@ export const navItems = [
   { label: '酿造故事', to: '/', hash: 'craft' },
   { label: '酒厂实力', to: '/', hash: 'strength' },
   { label: '企业定制', to: '/custom' },
-  { label: '需求方案建议', to: '/consult' },
+  { label: '方案建议', to: '/consult' },
 ];
 
 export const businessScenes = [

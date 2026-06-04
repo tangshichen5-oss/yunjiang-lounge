@@ -45,7 +45,7 @@ export default function Header() {
         ))}
       </nav>
       <button className="nav-cta" onClick={() => go({ to: '/custom', hash: 'booking' })}>
-        预约需求
+        预约
       </button>
       <button className="menu-toggle" onClick={() => setOpen((value) => !value)} aria-label="打开导航">
         {open ? <X size={21} /> : <Menu size={21} />}
