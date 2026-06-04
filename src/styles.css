@@ -757,12 +757,12 @@ p {
 }
 
 .strength-line {
-  display: flex;
-  min-height: 176px;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  min-height: 142px;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
   gap: 24px;
-  padding: 28px 26px;
+  padding: 24px 26px;
   border: 1px solid rgba(255, 250, 241, 0.14);
   border-radius: 8px;
   background: linear-gradient(180deg, rgba(255, 250, 241, 0.09), rgba(255, 250, 241, 0.025));
@@ -771,7 +771,7 @@ p {
 
 .strength-line strong {
   color: rgba(255, 247, 229, 0.9);
-  font-size: clamp(30px, 3.5vw, 45px);
+  font-size: clamp(36px, 3.6vw, 52px);
   line-height: 1;
   white-space: nowrap;
 }
@@ -781,7 +781,7 @@ p {
 }
 
 .strength-line p {
-  margin: 9px 0 0;
+  margin: 8px 0 0;
   color: rgba(255, 250, 240, 0.72);
   font-size: 14px;
   line-height: 1.65;
@@ -789,8 +789,8 @@ p {
 
 .strength-line span {
   display: block;
-  font-size: 15px;
-  line-height: 1.35;
+  font-size: 17px;
+  line-height: 1.38;
   white-space: pre-line;
 }
 
