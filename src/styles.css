@@ -848,6 +848,7 @@ p {
 }
 
 .craft-progress-line {
+  display: none;
   position: sticky;
   top: 18vh;
   left: 6vw;

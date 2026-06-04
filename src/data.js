@@ -3,6 +3,7 @@ import clientSigning from './assets/images/v3/client-signing.webp';
 import comingSoon from './assets/images/v3/coming-soon.webp';
 import corporateGifting from './assets/images/v3/corporate-gifting.webp';
 import customBottle from './assets/images/v3/custom-bottle.webp';
+import distillationWine from './assets/images/v3/distillation-wine.jpg';
 import distilleryAerial from './assets/images/v3/distillery-aerial.webp';
 import fermentationPits from './assets/images/v3/fermentation-pits.webp';
 import finishedWine from './assets/images/v3/finished-wine.webp';
@@ -24,6 +25,7 @@ export const imageAssets = {
   comingSoon,
   corporateGifting,
   customBottle,
+  distillationWine,
   distilleryAerial,
   fermentationPits,
   finishedWine,
@@ -140,8 +142,8 @@ export const craftSteps = [
   {
     kicker: '06',
     title: '蒸馏摘酒',
-    subtitle: '蒸馏出原浆酒，并通过摘酒工艺保留更合适的酒体部分。',
-    image: steaming,
+    subtitle: '从发酵完成的酒醅中蒸馏出原浆酒，并分段摘取更合适的酒体部分。',
+    image: distillationWine,
     tone: 'steam',
   },
   {
