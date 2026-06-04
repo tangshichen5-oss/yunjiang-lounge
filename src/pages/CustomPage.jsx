@@ -101,7 +101,7 @@ export default function CustomPage() {
             <FileText size={24} />
             <div>
               <h2>预约沟通</h2>
-              <p>先留下基础需求，后续可升级为“商务礼酒方案分析 + 需求卡生成”。当前表单为前端演示，不连接后台。</p>
+              <p>请留下企业名称、联系方式与使用场景，我们会据此梳理定制沟通重点，方便后续更快确认酒体、包装与交付方向。</p>
             </div>
           </div>
           <div className="form-grid">
@@ -123,7 +123,7 @@ export default function CustomPage() {
             <BrandSelect label="包装方向" name="packaging" value={form.packaging} options={consultationOptions.packaging} openSelect={openSelect} setOpenSelect={setOpenSelect} onChange={handleSelectChange} />
             <label>
               期望交付时间
-              <input name="date" type="date" value={form.date} onChange={handleChange} />
+              <input className="date-input" name="date" type="date" value={form.date} onChange={handleChange} />
             </label>
           </div>
           <label>
@@ -137,18 +137,18 @@ export default function CustomPage() {
           </label>
           <div className="form-actions-row">
             <button className="primary-link form-submit" type="submit">
-              生成咨询记录
+              预约定制沟通
               <Send size={18} />
             </button>
-            <Link className="soft-link dark" to="/consult">
-              方案建议
+            <Link className="form-secondary-link" to="/consult">
+              还不确定方向？先生成方案建议
               <ArrowRight size={18} />
             </Link>
           </div>
           {submitted && (
             <div className="submit-note">
               <CheckCircle2 size={18} />
-              已生成本页咨询记录演示。当前未连接后端，信息不会真实提交。
+              已整理为定制沟通记录。你可以截图保存本页，后续沟通时更容易确认定制方向。
             </div>
           )}
         </form>
