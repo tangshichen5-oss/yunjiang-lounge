@@ -1854,6 +1854,45 @@ textarea:focus {
   font-size: 14px;
 }
 
+@media (min-width: 1041px) {
+  .solution-note {
+    display: grid;
+    max-width: 1060px;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    align-items: center;
+    gap: 54px;
+    margin-top: 44px;
+    padding: 44px 48px;
+  }
+
+  .solution-note p {
+    max-width: 640px;
+    font-size: 18px;
+    line-height: 1.9;
+  }
+
+  .solution-note-actions {
+    min-width: 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .scenario-cta-title {
+    color: var(--walnut);
+    font-size: 21px;
+    font-weight: 900;
+  }
+
+  .solution-note-actions .slim-link {
+    min-width: 300px;
+    min-height: 58px;
+    font-size: 16px;
+  }
+}
+
 .page-hero {
   position: relative;
   min-height: 76vh;
@@ -2696,8 +2735,134 @@ textarea:focus {
   justify-content: flex-end;
 }
 
-.footer-actions a {
+.footer-actions a,
+.footer-actions button {
+  border: 0;
+  background: transparent;
   color: #f1d29a;
+  font: inherit;
+  cursor: pointer;
+}
+
+.contact-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(36, 20, 10, 0.34);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  backdrop-filter: blur(10px) saturate(120%);
+}
+
+.contact-modal {
+  position: relative;
+  width: min(460px, 100%);
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 86% 8%, rgba(212, 164, 91, 0.16), transparent 26%),
+    linear-gradient(180deg, rgba(255, 252, 246, 0.96), rgba(245, 232, 211, 0.92));
+  box-shadow: 0 32px 90px rgba(40, 21, 8, 0.28);
+  color: var(--ink);
+  text-align: center;
+}
+
+.contact-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(76, 47, 25, 0.12);
+  border-radius: 50%;
+  background: rgba(255, 250, 241, 0.72);
+  color: var(--walnut);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.contact-modal h2 {
+  margin-bottom: 18px;
+  color: var(--walnut);
+  font-size: 34px;
+}
+
+.contact-qr-wrap {
+  width: min(240px, 70vw);
+  margin: 0 auto 18px;
+  padding: 14px;
+  border: 1px solid rgba(184, 121, 53, 0.14);
+  border-radius: 22px;
+  background: rgba(255, 250, 241, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 16px 42px rgba(68, 40, 18, 0.1);
+}
+
+.contact-qr-wrap img {
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+}
+
+.contact-modal-note {
+  margin: 0 0 18px;
+  color: var(--muted);
+}
+
+.contact-lines {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 20px;
+  text-align: left;
+}
+
+.contact-lines p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(76, 47, 25, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 250, 241, 0.58);
+}
+
+.contact-lines span {
+  color: var(--muted);
+}
+
+.contact-lines strong {
+  color: var(--walnut);
+}
+
+.contact-copy-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.contact-copy-actions button {
+  min-height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #5d341e, #a86e3b 68%, #d8ad68);
+  color: #fffaf0;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 14px 34px rgba(75, 42, 19, 0.2);
+}
+
+.contact-copy-note {
+  margin-top: 14px;
+  padding: 11px 14px;
+  border-radius: 14px;
+  background: rgba(111, 148, 95, 0.12);
+  color: var(--walnut);
+  font-weight: 750;
 }
 
 @media (max-width: 1040px) {
@@ -3158,8 +3323,26 @@ textarea:focus {
 
   .coming-actions .primary-link,
   .coming-actions .soft-link,
-  .footer-actions a {
+  .footer-actions a,
+  .footer-actions button {
     width: 100%;
+  }
+
+  .contact-modal-overlay {
+    padding: 18px;
+  }
+
+  .contact-modal {
+    padding: 28px 20px 22px;
+    border-radius: 24px;
+  }
+
+  .contact-modal h2 {
+    font-size: 28px;
+  }
+
+  .contact-copy-actions {
+    grid-template-columns: 1fr;
   }
 }
 

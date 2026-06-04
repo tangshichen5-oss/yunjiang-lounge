@@ -114,7 +114,7 @@ export default function Home() {
             云酱会客厅会先看清这批酒的使用场合、赠送对象和关系表达，再建议合适的酒体、包装、预算和交付方式。
           </p>
           <div className="solution-note-actions">
-            <Link className="text-link" to="/scenes">进入商务场景页</Link>
+            <Link className="scenario-cta-title" to="/scenes">进入商务场景页</Link>
             <Link className="primary-link slim-link" to="/consult">生成初步方案建议</Link>
           </div>
         </Revealer>
