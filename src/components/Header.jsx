@@ -43,6 +43,10 @@ export default function Header() {
             {item.label}
           </button>
         ))}
+        <button className="mobile-nav-cta" onClick={() => go({ to: '/custom', hash: 'booking' })}>
+          <i>约</i>
+          预约
+        </button>
       </nav>
       <button className="nav-cta" onClick={() => go({ to: '/custom', hash: 'booking' })}>
         预约

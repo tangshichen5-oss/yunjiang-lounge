@@ -209,6 +209,10 @@ button {
   background: rgba(76, 47, 25, 0.075);
 }
 
+.mobile-nav-cta {
+  display: none;
+}
+
 .nav-cta {
   min-height: 38px;
   padding: 0 17px;
@@ -2947,6 +2951,20 @@ textarea:focus {
     font-weight: 800;
   }
 
+  .main-nav .mobile-nav-cta {
+    display: inline-flex;
+    margin-top: 8px;
+    border-top: 1px solid rgba(97, 59, 31, 0.12);
+    background: linear-gradient(135deg, rgba(92, 52, 30, 0.92), rgba(186, 121, 61, 0.86));
+    color: #fff8e9;
+    box-shadow: 0 16px 36px rgba(72, 41, 20, 0.16);
+  }
+
+  .main-nav .mobile-nav-cta i {
+    background: rgba(255, 247, 232, 0.18);
+    color: #fff8e9;
+  }
+
   .nav-cta {
     display: none;
   }
@@ -3401,7 +3419,39 @@ textarea:focus {
   }
 
   .solution-note {
-    padding: 22px 0 0;
+    gap: 28px;
+    margin-top: 34px;
+    padding: 28px 0 0;
+    border-top: 1px solid rgba(76, 47, 25, 0.14);
+    background: transparent;
+  }
+
+  .solution-note p {
+    font-size: 18px;
+    line-height: 1.9;
+  }
+
+  .solution-note-actions {
+    align-items: center;
+    gap: 0;
+    min-width: 0;
+  }
+
+  .scenario-cta-title {
+    width: 100%;
+    text-align: center;
+    color: var(--walnut);
+    font-size: 22px;
+    font-weight: 900;
+  }
+
+  .scenario-primary-cta {
+    display: flex;
+    width: 100%;
+    min-height: 58px;
+    justify-content: center;
+    margin: 20px 0 0;
+    padding: 0 22px;
   }
 
   .page-hero {
