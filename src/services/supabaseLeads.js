@@ -1,10 +1,19 @@
-export const leadFieldLabels = {
+const LEADS_TABLE = 'leads';
+const DEFAULT_FOLLOW_STATUS = '新线索';
+
+const systemFieldLabels = {
   createdAt: '提交时间',
   followStatus: '跟进状态',
+};
+
+const contactFieldLabels = {
   name: '联系人姓名',
   contact: '联系方式',
   company: '公司名称 / 单位名称',
   city: '所在城市',
+};
+
+const demandFieldLabels = {
   scene: '使用场景',
   recipient: '赠送或接待对象',
   budget: '预算范围',
@@ -12,6 +21,9 @@ export const leadFieldLabels = {
   customization: '包装或定制需求',
   deliveryTime: '期望交付时间',
   note: '其他补充说明',
+};
+
+const recommendationFieldLabels = {
   recommendedPlan: '初步推荐方案',
   reason: '需求判断',
   liquorSuggestion: '酒体方向',
@@ -20,6 +32,15 @@ export const leadFieldLabels = {
   warnings: '注意事项',
 };
 
+// Field labels used by AdminLeadsPage. Keys must match public.leads columns.
+export const leadFieldLabels = {
+  ...systemFieldLabels,
+  ...contactFieldLabels,
+  ...demandFieldLabels,
+  ...recommendationFieldLabels,
+};
+
+// Compact list view fields for the admin table.
 export const leadListFields = [
   'createdAt',
   'followStatus',
@@ -32,6 +53,7 @@ export const leadListFields = [
   'quantity',
 ];
 
+// Full detail view fields for the admin side panel.
 export const leadDetailFields = [
   'createdAt',
   'followStatus',
@@ -60,7 +82,7 @@ function getSupabaseConfig() {
   return {
     url: import.meta.env.VITE_SUPABASE_URL,
     anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-    table: 'leads',
+    table: LEADS_TABLE,
   };
 }
 
@@ -94,9 +116,10 @@ export function formatLeadDate(value) {
 }
 
 export function buildLeadData(demand, result, createdAt = new Date().toISOString()) {
+  // Submit payload: keep these keys aligned with public.leads columns.
   return {
     createdAt,
-    followStatus: '新线索',
+    followStatus: DEFAULT_FOLLOW_STATUS,
     name: demand.name?.trim() || '',
     contact: demand.contact?.trim() || '',
     company: demand.company?.trim() || '',
@@ -207,7 +230,7 @@ export async function submitLead(leadData) {
   }
 
   console.info('[云酱会客厅 Supabase 提交 payload]', {
-    table: 'public.leads',
+    table: `public.${LEADS_TABLE}`,
     hasUrl: Boolean(import.meta.env.VITE_SUPABASE_URL),
     hasAnonKey: Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY),
     contact: leadData.contact,
@@ -216,7 +239,7 @@ export async function submitLead(leadData) {
     leadData,
   });
 
-  const { data, error } = await supabase.from('leads').insert([leadData]).select();
+  const { data, error } = await supabase.from(LEADS_TABLE).insert([leadData]).select();
 
   if (error) {
     console.error('[云酱会客厅 Supabase 提交失败]', {
