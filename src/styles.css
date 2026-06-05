@@ -179,7 +179,7 @@ button {
 }
 
 .main-nav button,
-.menu-toggle,
+.topbar .menu-toggle,
 .nav-cta {
   position: relative;
   z-index: 1;
@@ -227,7 +227,7 @@ button {
   box-shadow: 0 10px 24px rgba(74, 43, 24, 0.18);
 }
 
-.menu-toggle {
+.topbar .menu-toggle {
   position: relative;
   z-index: 1;
   display: none;
@@ -3072,8 +3072,8 @@ p {
 
   .brand:active,
   .brand:focus,
-  .menu-toggle:active,
-  .menu-toggle:focus,
+  .topbar .menu-toggle:active,
+  .topbar .menu-toggle:focus,
   .main-nav button:active,
   .main-nav button:focus {
     background-color: rgb(232, 214, 186);
@@ -3081,7 +3081,7 @@ p {
   }
 
   .brand:focus-visible,
-  .menu-toggle:focus-visible,
+  .topbar .menu-toggle:focus-visible,
   .main-nav button:focus-visible {
     outline: 2px solid rgba(120, 82, 45, 0.18);
     outline-offset: 3px;
@@ -3105,7 +3105,7 @@ p {
     display: none;
   }
 
-  .menu-toggle {
+  .topbar .menu-toggle {
     display: inline-flex;
     margin-left: auto;
     flex: 0 0 auto;
@@ -3198,7 +3198,7 @@ p {
     white-space: nowrap;
   }
 
-  .menu-toggle {
+  .topbar .menu-toggle {
     width: 48px;
     height: 48px;
   }
