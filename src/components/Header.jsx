@@ -10,6 +10,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const topbarClass = ['topbar', scrolled && 'is-compact', open && 'is-menu-open'].filter(Boolean).join(' ');
 
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 24);
@@ -28,7 +29,7 @@ export default function Header() {
   };
 
   return (
-    <header className={scrolled ? 'topbar is-compact' : 'topbar'}>
+    <header className={topbarClass}>
       <Link className="brand" to="/">
         <span className="brand-symbol">云</span>
         <span>
@@ -36,7 +37,7 @@ export default function Header() {
           <small>商务酱香礼酒</small>
         </span>
       </Link>
-      <nav className={open ? 'main-nav is-open' : 'main-nav'} aria-label="主导航">
+      <nav id="main-navigation" className={open ? 'main-nav is-open' : 'main-nav'} aria-label="主导航">
         {navItems.map((item, index) => (
           <button key={`${item.label}-${item.hash || item.to}`} onClick={() => go(item)}>
             <i>{navMarks[index]}</i>
@@ -51,7 +52,13 @@ export default function Header() {
       <button className="nav-cta" onClick={() => go({ to: '/custom', hash: 'booking' })}>
         预约
       </button>
-      <button className="menu-toggle" onClick={() => setOpen((value) => !value)} aria-label="打开导航">
+      <button
+        className="menu-toggle"
+        onClick={() => setOpen((value) => !value)}
+        aria-controls="main-navigation"
+        aria-expanded={open}
+        aria-label={open ? '关闭导航' : '打开导航'}
+      >
         {open ? <X size={21} /> : <Menu size={21} />}
       </button>
     </header>
