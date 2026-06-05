@@ -2996,6 +2996,12 @@ p {
   .topbar.is-compact {
     top: 6px;
     min-height: 46px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    outline: 0;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .topbar.is-compact::before {
