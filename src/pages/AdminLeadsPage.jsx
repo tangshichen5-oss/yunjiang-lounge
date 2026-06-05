@@ -9,7 +9,7 @@ import {
   leadListFields,
 } from '../services/supabaseLeads.js';
 
-const adminAuthEnabled = false;
+const leadsAdminEnabled = import.meta.env.VITE_ENABLE_LEADS_ADMIN === 'true';
 
 function LeadValue({ field, value }) {
   const displayValue = field === 'createdAt' ? formatLeadDate(value) : formatLeadValue(value);
@@ -25,6 +25,8 @@ export default function AdminLeadsPage() {
   const sortedLeads = useMemo(() => leads || [], [leads]);
 
   const loadLeads = async () => {
+    if (!leadsAdminEnabled) return;
+
     setLoading(true);
     setError('');
     try {
@@ -38,8 +40,10 @@ export default function AdminLeadsPage() {
   };
 
   useEffect(() => {
-    if (!adminAuthEnabled) {
+    if (leadsAdminEnabled) {
       loadLeads();
+    } else {
+      setLoading(false);
     }
   }, []);
 
@@ -50,9 +54,9 @@ export default function AdminLeadsPage() {
           <div>
             <p className="eyebrow">Leads Admin</p>
             <h1>客户线索后台</h1>
-            <p>查看方案建议页同步的商务礼酒需求。当前为轻量后台，后续可接入登录保护。</p>
+            <p>查看方案建议页同步的商务礼酒需求。当前后台需通过环境变量启用，后续可接入登录保护。</p>
           </div>
-          <button className="soft-link dark admin-refresh" type="button" onClick={loadLeads}>
+          <button className="soft-link dark admin-refresh" type="button" onClick={loadLeads} disabled={!leadsAdminEnabled}>
             <RefreshCw size={17} />
             刷新线索
           </button>
@@ -61,7 +65,9 @@ export default function AdminLeadsPage() {
         {error && <div className="admin-alert">{error}</div>}
 
         <div className="admin-table-card">
-          {loading ? (
+          {!leadsAdminEnabled ? (
+            <div className="admin-empty">后台线索查看未启用。</div>
+          ) : loading ? (
             <div className="admin-empty">正在加载客户线索...</div>
           ) : sortedLeads.length === 0 ? (
             <div className="admin-empty">当前还没有客户线索。</div>

@@ -229,15 +229,19 @@ export async function submitLead(leadData) {
     throw new Error('SUPABASE_CONFIG_MISSING');
   }
 
-  console.info('[云酱会客厅 Supabase 提交 payload]', {
+  const submitLog = {
     table: `public.${LEADS_TABLE}`,
     hasUrl: Boolean(import.meta.env.VITE_SUPABASE_URL),
     hasAnonKey: Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY),
-    contact: leadData.contact,
+    hasContact: Boolean(leadData.contact?.trim()),
     communicationFocusType: Array.isArray(leadData.communicationFocus) ? 'array' : typeof leadData.communicationFocus,
     warningsType: Array.isArray(leadData.warnings) ? 'array' : typeof leadData.warnings,
-    leadData,
-  });
+  };
+
+  console.info(
+    '[云酱会客厅 Supabase 提交 payload]',
+    import.meta.env.DEV ? { ...submitLog, leadData } : submitLog,
+  );
 
   const { data, error } = await supabase.from(LEADS_TABLE).insert([leadData]).select();
 
