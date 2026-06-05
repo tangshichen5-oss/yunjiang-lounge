@@ -3014,11 +3014,11 @@ p {
     max-width: calc(100vw - 108px);
     min-height: 48px;
     padding: 6px 14px 6px 7px;
-    border: 1px solid rgba(120, 82, 45, 0.08);
+    border: 1px solid rgba(120, 82, 45, 0.06);
     border-radius: 999px;
-    background: rgba(232, 214, 186, 0.98);
+    background: rgb(232, 214, 186);
     box-shadow:
-      0 10px 24px rgba(39, 24, 12, 0.16);
+      0 10px 24px rgba(39, 24, 12, 0.14);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     -webkit-tap-highlight-color: transparent;
@@ -3033,7 +3033,7 @@ p {
   .topbar.is-compact .menu-toggle {
     opacity: 1;
     box-shadow:
-      0 10px 24px rgba(39, 24, 12, 0.16);
+      0 10px 24px rgba(39, 24, 12, 0.14);
   }
 
   .main-nav {
@@ -3047,9 +3047,9 @@ p {
     align-items: stretch;
     gap: 5px;
     padding: 12px;
-    border: 1px solid rgba(120, 82, 45, 0.08);
+    border: 1px solid rgba(120, 82, 45, 0.06);
     border-radius: 20px;
-    background: rgba(232, 214, 186, 0.98);
+    background: rgb(232, 214, 186);
     box-shadow:
       0 14px 32px rgba(39, 24, 12, 0.14);
     -webkit-backdrop-filter: none;
@@ -3076,7 +3076,7 @@ p {
   .menu-toggle:focus,
   .main-nav button:active,
   .main-nav button:focus {
-    background-color: rgba(232, 214, 186, 0.98);
+    background-color: rgb(232, 214, 186);
     outline: none;
   }
 
@@ -3111,10 +3111,10 @@ p {
     flex: 0 0 auto;
     width: 48px;
     height: 48px;
-    border: 1px solid rgba(120, 82, 45, 0.08);
-    background: rgba(232, 214, 186, 0.98);
+    border: 1px solid rgba(120, 82, 45, 0.06);
+    background: rgb(232, 214, 186);
     box-shadow:
-      0 10px 24px rgba(39, 24, 12, 0.16);
+      0 10px 24px rgba(39, 24, 12, 0.14);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     -webkit-tap-highlight-color: transparent;
