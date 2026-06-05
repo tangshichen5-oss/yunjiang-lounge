@@ -2947,9 +2947,9 @@ p {
   .mobile-scroll-mask {
     position: fixed;
     z-index: 92;
-    top: -10px;
-    left: -10px;
-    right: -10px;
+    top: -14px;
+    left: -100vw;
+    right: -100vw;
     display: block;
     height: 112px;
     pointer-events: none;
@@ -2981,10 +2981,16 @@ p {
 
   .topbar::before {
     display: none;
+    content: none;
+    background: transparent;
+    box-shadow: none;
   }
 
   .topbar::after {
     display: none;
+    content: none;
+    background: transparent;
+    box-shadow: none;
   }
 
   .topbar.is-compact {
@@ -3002,12 +3008,11 @@ p {
     max-width: calc(100vw - 108px);
     min-height: 48px;
     padding: 6px 14px 6px 7px;
-    border: 1px solid rgba(120, 86, 54, 0.1);
+    border: 1px solid rgba(132, 93, 48, 0.08);
     border-radius: 999px;
-    background: rgba(226, 211, 190, 0.94);
+    background: rgba(232, 214, 186, 0.96);
     box-shadow:
-      0 8px 18px rgba(40, 26, 14, 0.09),
-      0 1px 0 rgba(255, 248, 238, 0.34);
+      0 6px 14px rgba(40, 26, 14, 0.075);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     transition: opacity 220ms ease, background 220ms ease, box-shadow 220ms ease;
@@ -3021,8 +3026,7 @@ p {
   .topbar.is-compact .menu-toggle {
     opacity: 0.92;
     box-shadow:
-      0 6px 14px rgba(40, 26, 14, 0.075),
-      0 1px 0 rgba(255, 248, 238, 0.26);
+      0 5px 12px rgba(40, 26, 14, 0.06);
   }
 
   .main-nav {
@@ -3085,11 +3089,10 @@ p {
     flex: 0 0 auto;
     width: 48px;
     height: 48px;
-    border: 1px solid rgba(120, 86, 54, 0.1);
-    background: rgba(226, 211, 190, 0.94);
+    border: 1px solid rgba(132, 93, 48, 0.08);
+    background: rgba(232, 214, 186, 0.96);
     box-shadow:
-      0 8px 18px rgba(40, 26, 14, 0.09),
-      0 1px 0 rgba(255, 248, 238, 0.34);
+      0 6px 14px rgba(40, 26, 14, 0.075);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     transition: opacity 220ms ease, background 220ms ease, box-shadow 220ms ease;
