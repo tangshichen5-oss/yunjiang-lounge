@@ -29,38 +29,41 @@ export default function Header() {
   };
 
   return (
-    <header className={topbarClass}>
-      <Link className="brand" to="/">
-        <span className="brand-symbol">云</span>
-        <span>
-          <strong>云酱会客厅</strong>
-          <small>商务酱香礼酒</small>
-        </span>
-      </Link>
-      <nav id="main-navigation" className={open ? 'main-nav is-open' : 'main-nav'} aria-label="主导航">
-        {navItems.map((item, index) => (
-          <button key={`${item.label}-${item.hash || item.to}`} onClick={() => go(item)}>
-            <i>{navMarks[index]}</i>
-            {item.label}
+    <>
+      <div className="mobile-scroll-mask" aria-hidden="true" />
+      <header className={topbarClass}>
+        <Link className="brand" to="/">
+          <span className="brand-symbol">云</span>
+          <span>
+            <strong>云酱会客厅</strong>
+            <small>商务酱香礼酒</small>
+          </span>
+        </Link>
+        <nav id="main-navigation" className={open ? 'main-nav is-open' : 'main-nav'} aria-label="主导航">
+          {navItems.map((item, index) => (
+            <button key={`${item.label}-${item.hash || item.to}`} onClick={() => go(item)}>
+              <i>{navMarks[index]}</i>
+              {item.label}
+            </button>
+          ))}
+          <button className="mobile-nav-cta" onClick={() => go({ to: '/custom', hash: 'booking' })}>
+            <i>约</i>
+            预约
           </button>
-        ))}
-        <button className="mobile-nav-cta" onClick={() => go({ to: '/custom', hash: 'booking' })}>
-          <i>约</i>
+        </nav>
+        <button className="nav-cta" onClick={() => go({ to: '/custom', hash: 'booking' })}>
           预约
         </button>
-      </nav>
-      <button className="nav-cta" onClick={() => go({ to: '/custom', hash: 'booking' })}>
-        预约
-      </button>
-      <button
-        className="menu-toggle"
-        onClick={() => setOpen((value) => !value)}
-        aria-controls="main-navigation"
-        aria-expanded={open}
-        aria-label={open ? '关闭导航' : '打开导航'}
-      >
-        {open ? <X size={21} /> : <Menu size={21} />}
-      </button>
-    </header>
+        <button
+          className="menu-toggle"
+          onClick={() => setOpen((value) => !value)}
+          aria-controls="main-navigation"
+          aria-expanded={open}
+          aria-label={open ? '关闭导航' : '打开导航'}
+        >
+          {open ? <X size={21} /> : <Menu size={21} />}
+        </button>
+      </header>
+    </>
   );
 }
