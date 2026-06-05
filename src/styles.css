@@ -2947,9 +2947,9 @@ p {
   .mobile-scroll-mask {
     position: fixed;
     z-index: 92;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: -10px;
+    left: -10px;
+    right: -10px;
     display: block;
     height: 112px;
     pointer-events: none;
