@@ -4,10 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 import {
   businessScenes,
   craftSteps,
+  digitalServiceSteps,
+  digitalServiceWidgets,
   faqs,
   imageAssets,
   loungeSpaces,
   products,
+  solutionChips,
   strengthStats,
 } from '../data.js';
 import CountUp from '../components/CountUp.jsx';
@@ -15,6 +18,13 @@ import HorizontalRail from '../components/HorizontalRail.jsx';
 import ImageCard from '../components/ImageCard.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 import Revealer from '../components/Revealer.jsx';
+
+const serviceWidgetIcons = {
+  users: Users,
+  qrCode: QrCode,
+  clipboardList: ClipboardList,
+  calendarClock: CalendarClock,
+};
 
 export default function Home() {
   const location = useLocation();
@@ -102,7 +112,7 @@ export default function Home() {
           </p>
         </Revealer>
         <div className="solution-grid">
-          {['企业接待', '客户答谢', '节庆礼赠', '签约宴请', '企业定制', '品鉴会'].map((item, index) => (
+          {solutionChips.map((item, index) => (
             <Revealer className="solution-chip" delay={index * 60} key={item}>
               <span>{String(index + 1).padStart(2, '0')}</span>
               <strong>{item}</strong>
@@ -259,7 +269,7 @@ export default function Home() {
               <strong>企业客户服务看板</strong>
             </div>
             <div className="console-track">
-              {['需求确认', '方案设计', '样品确认', '包装制作', '交付回访'].map((item, index) => (
+              {digitalServiceSteps.map((item, index) => (
                 <div className={index < 3 ? 'console-step active' : 'console-step'} key={item}>
                   <i />
                   <span>{item}</span>
@@ -268,10 +278,16 @@ export default function Home() {
             </div>
           </div>
           <div className="service-widgets">
-            <div><Users size={20} /><span>客户档案</span><strong>偏好 / 周期 / 复购</strong></div>
-            <div><QrCode size={20} /><span>扫码选品</span><strong>到店快速了解</strong></div>
-            <div><ClipboardList size={20} /><span>需求表单</span><strong>预算数量标准化</strong></div>
-            <div><CalendarClock size={20} /><span>复购提醒</span><strong>节庆节点跟进</strong></div>
+            {digitalServiceWidgets.map((widget) => {
+              const Icon = serviceWidgetIcons[widget.icon];
+              return (
+                <div key={widget.label}>
+                  <Icon size={20} />
+                  <span>{widget.label}</span>
+                  <strong>{widget.value}</strong>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
